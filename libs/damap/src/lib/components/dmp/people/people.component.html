@@ -106,6 +106,7 @@
 <!-- LIST OF PEOPLE -->
 <div class="list-container" *ngIf="projectMembers?.length > 0; else empty">
   <mat-card
+    appearance="raised"
     *ngFor="
       let member of projectMembers
         | contributorFilter : dmpForm.controls.contributors.value
