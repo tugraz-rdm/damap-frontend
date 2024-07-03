@@ -15,6 +15,10 @@
       "text": "Zurück zur Hauptseite",
       "link": "/"
     },
+    "baseLogo": {
+      "text": "DAMAP",
+      "link": "https://damap.org/"
+    },
     "dataprotection": {
       "text": "Datenschutzerklärung",
       "link": "/assets/legal/Datenschutzerklärung_PrivacyPolicy_TU_Graz_DMP_Tool.pdf"

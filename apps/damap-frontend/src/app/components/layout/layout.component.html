@@ -98,8 +98,19 @@
 </mat-sidenav-container>
 <div class="footer">
   <div class="version-information">
-    {{ "layout.version" | translate }}: {{ version }}
-    <a [routerLink]="'/gdpr'" rel="noopener">{{ "layout.gdpr" | translate }}</a>
+    <div>
+      {{ "layout.version" | translate }}: {{ version }}
+      <a [routerLink]="'/gdpr'" rel="noopener">{{
+        "layout.gdpr" | translate
+      }}</a>
+    </div>
+    <a
+      class="mat-focus-indicator"
+      [href]="'layout.baseLogo.link' | translate"
+      target="_blank"
+      rel="noopener">
+      <img src="assets/damap_white_new.png" alt="Logo" height="40" />
+    </a>
   </div>
   <div class="info">
     <a
