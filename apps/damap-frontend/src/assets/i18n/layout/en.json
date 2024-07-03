@@ -11,6 +11,10 @@
     },
     "logout": "Logout",
     "version": "Version",
+    "baseLogo": {
+      "text": "DAMAP",
+      "link": "https://damap.org/"
+    },
     "logo": {
       "text": "Go back to main page",
       "link": "/"
