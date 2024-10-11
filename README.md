@@ -1,56 +1,67 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tuwien-csd_damap-frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tuwien-csd_damap-frontend)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tuwien-csd_damap-frontend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tuwien-csd_damap-frontend)
+# maDMPs Frontend Project for TU Graz
 
-# DAMAP
+This repository contains the source code for the frontend of DAMAP, developed as part of the TU Graz implementation. DAMAP (Data Management Plan) is a tool aimed at creating machine-actionable data management plans (maDMPs), facilitating better data management practices in research.
 
-## Introduction
+DAMAP is based on the concept of machine-actionable Data Management Plans (maDMPs) and was originally developed by TU Wien. It integrates institutional systems to collect project information, research data, and personnel data, reducing the need for redundant data entry. The system provides both human-readable DMPs and machine-actionable versions that can be integrated into workflows.
 
-DAMAP is a tool that is currently being developed by TU Wien and TU Graz as part of the
-[FAIR Data Austria](https://forschungsdaten.at/fda/) project.
-It is based on the idea of machine actionable data management plans (maDMPs) and aims to facilitate the
-creation of data management plans (DMPs) for researchers.
-The tool aims to be closely integrated into the institutional environment, collecting information from
-various established systems, in order to perceive project information, research data and personnel data
-from existing systems.
-This saves DMP authors from having to enter the same data several times.
-Finally DAMAP delivers both a DMP that can be read and edited as a Word document, and an maDMP whose
-information can be used at machine level. The current content of DAMAP is based on
-[Science Europe’s Practical Guide to the International Alignment of Research Data Management](https://www.tuwien.at/fileadmin/Assets/forschung/Zentrum_Forschungsdatenmanagement/pdf-Sammlung/se_rdm_practical_guide_extended_final_2021.pdf)
-and is compatible with
-the [RDA recommendation on machine actionable DMPs](https://zenodo.org/record/4036060#.Yk20vjWxVaR).
+We at TU Graz also contribute to the base DAMAP implementation, collaborating closely to enhance its functionality and adapt it to institutional needs.
 
-For a showcase of some of the tools functions see the [demo video](https://youtu.be/IxQzqy26ZO4).
+## DAMAP Frontend
 
-## Damap Project and Documentation
+This project is based on the DAMAP frontend developed in cooperation between TU Wien and TU Graz, but has been adapted to meet the specific needs of the TUGraz DMP Tool. This adaptation focuses on institutional integration, allowing researchers to manage their Data Management Plans (DMPs) efficiently, leveraging existing systems at the institution.
 
-For an overview and instructions for running the whole damap package (backend and frontend),
-refer to the [damap-backend](https://github.com/tuwien-csd/damap-backend) project.
+The project uses [Angular](https://angular.io/) as its framework and relies on [NX](https://nx.dev/) as a build system.
 
-## DamapFrontend
+### Development Server
 
-This repository contains the source code for the frontend of DAMAP and need to be run
-with [damap-backend](https://github.com/tuwien-csd/damap-backend).
-The project is based on [Angular](https://angular.io/) and uses [NX](https://nx.dev/) as a build system.
+To run the development server:
 
-### Development server
+```bash
+nx serve damap-frontend
+```
 
-Run `nx serve damap-frontend` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload
-if you change any of the source files.
+This will start the dev server, and the app will be accessible at `http://localhost:4200/`. Any changes made to the source files will trigger automatic reloading.
 
 ### Build
 
-Run `nx build damap-frontend` to build the project. The build artifacts will be stored in the `dist/` directory. Use
-the `--prod` flag for a production build.
+To build the project for production:
 
-### Running unit tests
+```bash
+nx build damap-frontend
+```
 
-Run `nx test damap` to execute the unit tests for the library and `nx test damap-frontend` for the application.
+The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-### Run the project with docker
+### Running Unit Tests
 
-For running the project in conjunction with the backend in a dockerized setup,
-please refer to the [damap-backend](https://github.com/tuwien-csd/damap-backend) project.
+To run the unit tests:
 
-### Customising
+- For the DAMAP library:
 
-Please refer to the [CUSTOMISING](CUSTOMISING.md) page.
+  ```bash
+  nx test damap
+  ```
+
+- For the DAMAP frontend:
+
+  ```bash
+  nx test damap-frontend
+  ```
+
+### Running with Docker
+
+To run the frontend and backend together in a dockerized setup, please refer to the [DAMAP backend repository](https://github.com/tugraz-rdm/damap-backend) for further instructions.
+
+### Customisation
+
+For customising the DAMAP frontend, please refer to the [CUSTOMISING](CUSTOMISING.md) page.
+
+## Authors
+
+- David Eckhard
+- Laura Thaci
+- Mojib Wali
+
+## Screenshots
+
+![DMP-Tool-TUGraz](https://github.com/user-attachments/assets/81922d01-f12f-46b2-9a39-2f4941592d32)
