@@ -5,7 +5,9 @@
         "input": {
           "title": "Projekttitel",
           "description": "Projektbeschreibung",
-          "button": "Projekt aktualisieren"
+          "button": "Projekt aktualisieren",
+          "date": "Start und Enddatum",
+          "datehint": "TT/MM/JJJJ – TT/MM/JJJJ"
         },
         "manual.input": "Projekt manuell eingeben",
         "list": "Projekt aus der Projekt-Datenbank auswählen",

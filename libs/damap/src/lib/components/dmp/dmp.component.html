@@ -1,4 +1,6 @@
+<app-info-card [infoLabel]="infoInstruction"></app-info-card>
 <mat-vertical-stepper
+  class="verticalStepper"
   #stepper
   [linear]="false"
   (selectionChange)="changeStep($event); changeStepPosition($event)">
@@ -7,6 +9,7 @@
       [projectStep]="projectStep"
       (project)="changeProject($event)"></app-dmp-project>
   </mat-step>
+
   <mat-step label="{{ 'dmp.steps.people.label' | translate }}">
     <app-dmp-people
       [config$]="config$"
@@ -14,9 +17,11 @@
       [dmpForm]="dmpForm"
       (contactPerson)="changeContactPerson($event)"
       (contributorToAdd)="addContributor($event)"
-      (contributorToRemove)="removeContributor($event)">
+      (contributorToRemove)="removeContributor($event)"
+      (contributorToUpdate)="updateContributorDetails($event)">
     </app-dmp-people>
   </mat-step>
+
   <mat-step
     label="{{ 'dmp.steps.data.specify.label' | translate }}"
     [hasError]="specifyDataStep.invalid || datasets.invalid">
@@ -36,8 +41,8 @@
     label="{{ 'dmp.steps.documentation.label' | translate }}"
     [hasError]="docDataStep.invalid">
     <ng-container *ngIf="showStep; else noDatasets">
-      <app-dmp-doc-data-quality
-        [docDataStep]="docDataStep"></app-dmp-doc-data-quality>
+      <app-dmp-doc-data-quality [docDataStep]="docDataStep">
+      </app-dmp-doc-data-quality>
     </ng-container>
   </mat-step>
   <mat-step
@@ -130,7 +135,7 @@
     </ng-container>
   </mat-step>
   <mat-step label="{{ 'dmp.steps.end.label' | translate }}">
-    <app-dmp-summary></app-dmp-summary>
+    <app-dmp-summary [stepper]="stepper"></app-dmp-summary>
   </mat-step>
 </mat-vertical-stepper>
 

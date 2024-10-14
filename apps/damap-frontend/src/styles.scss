@@ -6,6 +6,12 @@
 :root {
   --primary: #{mat.get-theme-color($app-light-theme, primary)};
   --on-primary: #{mat.get-theme-color($app-light-theme, on-primary)};
+  --primary-lightest: #{mat.get-theme-color($app-light-theme, primary, 100)};
+  --primary-lightest-shadow: #{mat.get-theme-color(
+      $app-light-theme,
+      primary,
+      95
+    )};
   --accent-color-lighter: #{mat.get-theme-color($app-light-theme, primary, 60)};
   --secondary: #{mat.get-theme-color($app-light-theme, secondary)};
   --secondary-container: #{mat.get-theme-color($app-light-theme, primary, 99)};
@@ -40,6 +46,11 @@
   --footer-color: #{mat.get-theme-color($app-light-theme, inverse-surface)};
   --on-footer-color: #{mat.get-theme-color($app-light-theme, inverse-on-surface)};
   --user-navbar-color: #{mat.get-theme-color($app-light-theme, neutral, 25)};
+  --neutral-color-medium-light: #{mat.get-theme-color(
+      $app-light-theme,
+      neutral,
+      70
+    )};
   --step-intro-color: #{mat.get-theme-color(
       $app-light-theme,
       neutral-variant,
@@ -51,6 +62,7 @@
   --success-container: #e9f5d2;
   --on-success-container: black;
   --warning-bg: #fff4cb;
+  --background-body: #f6f6f6;
   // some values can not be generated from themes - they can be hardcoded here
   --blue-tag: aliceblue;
   --green-tag: #d1eee1;

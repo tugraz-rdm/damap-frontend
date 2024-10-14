@@ -84,10 +84,11 @@ describe('DmpComponent', () => {
     component = fixture.componentInstance;
     component.config$ = new Subject<Config>();
     fixture.detectChanges();
+
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
-  it('should create', () => {
+  it('should create', async () => {
     expect(component).toBeTruthy();
   });
 

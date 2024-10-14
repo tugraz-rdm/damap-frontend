@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  background-color: var(--background-body);
 }
 
 body {
@@ -25,12 +26,14 @@ body {
   border: 0;
 }
 
+// TODO: rename to .scale-50 for general purpose?
 .mat-icon-style {
-  font-size: smaller;
+  transform: scale(50%);
 }
 
 .material-icons.mat-icon {
   overflow: initial;
+  vertical-align: middle;
 }
 
 .mat-icon-contact {
@@ -48,11 +51,6 @@ body {
 .mat-card-left {
   flex-direction: column;
   flex-grow: 1;
-  /*width: 90%;*/
-}
-
-.mat-card-right {
-  /*float: right;*/
 }
 
 mat-card {
@@ -132,6 +130,19 @@ mat-card {
   border-radius: 40px !important;
 }
 
-.mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: var(--tertiary-color-very-light) !important;
+.mat-icon-shadow {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px !important;
+  border: 1px solid transparent !important;
+  box-shadow: 0px 0px 10px 5px rgba(246, 246, 246, 0.5) !important;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease !important;
+  will-change: transform;
+}
+
+.mat-icon-shadow:hover {
+  transform: scale(1.005) translateZ(0);
+  box-shadow: 0px 0px 15px 10px rgba(246, 246, 246, 1);
 }

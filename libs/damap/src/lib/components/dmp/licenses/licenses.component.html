@@ -1,4 +1,3 @@
-<app-step-intro>{{ "dmp.steps.licensing.intro" | translate }} </app-step-intro>
 <p>{{ "dmp.steps.licensing.hint" | translate }}</p>
 <div [formGroup]="dmpForm">
   <ng-container
@@ -38,7 +37,7 @@
               dataset.value.legalRestrictions
             ">
             <div class="warning-icon">
-              <mat-icon>error_outline</mat-icon>
+              <mat-icon class="outline">error</mat-icon>
             </div>
             <ng-container
               *ngIf="dataset.value.personalData || dataset.value.sensitiveData">
