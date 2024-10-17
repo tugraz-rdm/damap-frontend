@@ -112,8 +112,16 @@
           "layout.gdpr" | translate
         }}</a>
         <span class="version-text"
-          >{{ "layout.version" | translate }}: {{ version }}</span
-        >
+          >{{ "layout.version" | translate }}: {{ version
+          }}{{ "layout.baseVersion" | translate }}
+        </span>
+        <a
+          class="mat-focus-indicator baseLogo"
+          [href]="'layout.baseLogo.link' | translate"
+          target="_blank"
+          rel="noopener">
+          <img src="assets/damap_white_new.png" alt="Logo" height="30" />
+        </a>
       </div>
     </div>
     <div *ngIf="isCollapsed" class="footer-icon">
@@ -126,7 +134,7 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content class="mat-sidenav-content">
-    <!-- <app-env-banner *ngIf="env === 'DEV'"></app-env-banner> -->
+    <app-env-banner *ngIf="env === 'DEV'"></app-env-banner>
     <mat-toolbar class="toolbar">
       <mat-toolbar-row id="mainHeader">
         <div class="header-container">

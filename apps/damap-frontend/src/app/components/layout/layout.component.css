@@ -142,6 +142,10 @@
   color: var(--neutral-color-medium-light) !important;
 }
 
+.version-information {
+  text-align: center;
+}
+
 #logout {
   transform: scale(0.7);
 }
@@ -205,6 +209,10 @@ mat-nav-list {
   display: flex;
   align-items: center;
   text-align: left;
+}
+
+.baseLogo {
+  top: 15px;
 }
 
 .languageElement-desktop {
