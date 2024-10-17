@@ -1,16 +1,6 @@
-<div *ngIf="!datasets.controls.length; else retentionPeriod">
-  {{ "dmps.nodatasets" | translate }}
-</div>
-<ng-template #retentionPeriod>
-  <app-retention-period
-    [dmpForm]="dmpForm"
-    [datasets]="datasets"></app-retention-period>
-</ng-template>
 <!-- SELECTED REPOS-->
 <h2 translate>dmp.steps.repositories.heading</h2>
-<app-step-intro>
-  {{ "dmp.steps.repositories.intro" | translate }}
-</app-step-intro>
+
 <div *ngIf="repoStep.controls.length" [formGroup]="dmpForm">
   <p translate>dmp.steps.repositories.selected</p>
   <mat-card
@@ -60,6 +50,15 @@
     </mat-card-content>
   </mat-card>
 </div>
+<div *ngIf="!datasets.controls.length; else retentionPeriod">
+  {{ "dmps.nodatasets" | translate }}
+</div>
+<!-- RETENTION PERIOD-->
+<ng-template #retentionPeriod>
+  <app-retention-period
+    [dmpForm]="dmpForm"
+    [datasets]="datasets"></app-retention-period>
+</ng-template>
 
 <!-- TABS -->
 <ng-container *ngIf="recommended$ | async as recommended">
@@ -72,7 +71,7 @@
       <ng-container
         *ngIf="(recommended | repo: repoStep.value).length; else noRecommended">
         <app-repo-recommendation
-          [recommended]="recommended"
+          [recommended]="recommended | repo: repoStep.value"
           [loaded]="recommendedLoaded$ | async"
           (repositoryToAdd)="addRepository($event)">
         </app-repo-recommendation>

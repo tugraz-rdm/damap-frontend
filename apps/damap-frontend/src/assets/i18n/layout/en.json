@@ -4,13 +4,18 @@
     "menu": {
       "home": "Home",
       "plans": "DMPs",
+      "greeting": "Hi",
+      "titleDashboard": " let's get started!",
+      "section": "Welcome to DAMAP, a service that helps you create a Data Management Plan (DMP) for your project.",
       "mobile": {
         "open": "Open page navigation",
         "close": "Close page navigation"
-      }
+      },
+      "infoDashboard": "You can create a new DMP by clicking the 'Create New DMP' button"
     },
     "logout": "Logout",
     "version": "Version",
+    "baseVersion": " (based on DAMAP v4.2.1)",
     "baseLogo": {
       "text": "DAMAP",
       "link": "https://damap.org/"
@@ -35,7 +40,10 @@
       "text": "Accessibility",
       "link": "/assets/legal/Barrierefreiheitserklärung_AccessibilityStatement_TU_Graz_DMP_Tool.pdf"
     },
-    "gdpr": "GDPR Info-Box"
+    "icon": {
+      "dataAlert": "Expand the menu to access legal information"
+    },
+    "gdpr": "GDPR Info"
   },
   "env": {
     "title": "Test Environment",
