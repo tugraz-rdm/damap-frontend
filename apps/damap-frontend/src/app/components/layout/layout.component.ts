@@ -57,7 +57,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.name = this.auth.getDisplayName();
     const browserLang = this.translate.getBrowserLang();
-    this.translate.use(browserLang?.match(/en|de/) ? browserLang : 'en');
+    this.translate.use(browserLang?.match(/en/) ? browserLang : 'en');
     this.lang = this.translate.currentLang.toUpperCase();
     this.observer.observe([Breakpoints.Handset]).subscribe(result => {
       this.isSmallScreen = result.matches;
