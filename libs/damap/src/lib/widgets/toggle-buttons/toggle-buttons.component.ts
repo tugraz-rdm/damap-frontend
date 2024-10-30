@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
@@ -14,8 +15,17 @@ export class ToggleButtonsComponent {
     'primaryView' | 'secondaryView'
   >();
 
+  cols: number = 2;
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
   ngOnInit(): void {
     this.emitSelection('primaryView');
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall, Breakpoints.XSmall])
+      .subscribe(result => {
+        // If matches handset or tablet, set 1 column, else 2 columns
+        this.cols = result.matches ? 1 : 2;
+      });
   }
 
   emitSelection(view: 'primaryView' | 'secondaryView'): void {

@@ -3,7 +3,8 @@
     #sidenav
     [mode]="isSmallScreen && !isCollapsed ? 'over' : 'side'"
     [opened]="true"
-    [class.collapsed]="isCollapsed"
+    [ngClass]="{ collapsed: isCollapsed }"
+    [ngStyle]="{ width: isCollapsed ? '90px' : '300px' }"
     [fixedInViewport]="true"
     [disableClose]="true"
     class="mat-sidenav">

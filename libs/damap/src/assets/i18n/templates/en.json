@@ -18,7 +18,7 @@
         "instructions": "In this step, you choose a project from your institution’s project database (if integrated) or manually input your project.",
         "search": "Search project...",
         "select": "Please select the project you want to create a DMP for:",
-        "selected": "You selected:",
+        "selected": "Find person and service search solutions:",
         "warning.dmp": "A DMP already exists for this project",
         "noprojects": "No projects are assigned to you.",
         "loading": {

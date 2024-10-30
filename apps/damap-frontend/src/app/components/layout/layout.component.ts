@@ -3,6 +3,7 @@ import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -53,6 +54,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     private configService: ConfigService,
     private observer: BreakpointObserver,
     private router: Router,
+    private cdr: ChangeDetectorRef,
   ) {
     this.env = this.configService.getEnvironment();
   }
@@ -62,10 +64,15 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(browserLang?.match(/en|de/) ? browserLang : 'en');
     this.lang = this.translate.currentLang.toUpperCase();
-    this.observer.observe([Breakpoints.Handset]).subscribe(result => {
-      this.isSmallScreen = result.matches;
-      this.checkScreenSize();
-      this.handleRouteChange();
+
+    // the breakpoint (1300px) here can be adjusted based on design requirements or device-specific considerations.
+    this.observer.observe(['(max-width: 1300px)']).subscribe(result => {
+      console.log(
+        'screen width is less than or equal to 1300px:',
+        result.matches,
+      );
+      this.isCollapsed = result.matches;
+      this.cdr.detectChanges();
     });
   }
 
@@ -97,7 +104,6 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   public logout(): void {
     this.auth.logout();
   }
-
   toggleMenu(): void {
     this.isCollapsed = !this.isCollapsed;
   }
