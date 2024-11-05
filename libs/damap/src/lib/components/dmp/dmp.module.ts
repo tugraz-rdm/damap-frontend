@@ -62,6 +62,7 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     VersionModule,
     AccessComponent,
     // Steps
+    ProjectModule,
     PeopleModule,
     SpecifyDataModule,
     DocDataQualityModule,

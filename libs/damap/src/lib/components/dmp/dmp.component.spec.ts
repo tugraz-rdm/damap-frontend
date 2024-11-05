@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperHarness } from '@angular/material/stepper/testing';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../testing/translate-testing/translate-testing.module';
@@ -57,7 +58,9 @@ describe('DmpComponent', () => {
         MatStepperModule,
         MatButtonModule,
         NoopAnimationsModule,
-        RouterModule.forRoot([]),
+        RouterTestingModule.withRoutes([
+          /*{path: 'plans', component: PlansComponent}*/
+        ]),
         TranslateTestingModule,
         FormTestingModule,
       ],
@@ -78,13 +81,14 @@ describe('DmpComponent', () => {
     }).compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fixture = TestBed.createComponent(DmpComponent);
     component = fixture.componentInstance;
     component.config$ = new Subject<Config>();
-    fixture.detectChanges();
+    await fixture.whenStable();
 
     loader = TestbedHarnessEnvironment.loader(fixture);
+    fixture.detectChanges();
   });
 
   it('should create', async () => {
@@ -93,6 +97,7 @@ describe('DmpComponent', () => {
 
   describe('ngOnInit', () => {
     it('should load service config and publish he result into config$ observable', () => {
+      fixture.detectChanges();
       component.ngOnInit();
       expect(loadServiceConfigSpy).toHaveBeenCalled();
       component.config$.subscribe(config =>

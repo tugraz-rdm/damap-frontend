@@ -11,14 +11,13 @@ import { ExportWarningModule } from '../../../widgets/export-warning-dialog/expo
 import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
 import { FormsModule } from '@angular/forms';
 import { HarnessLoader } from '@angular/cdk/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { LivePreviewComponent } from '../live-preview/live-preview.component';
 import { LivePreviewModule } from '../live-preview/live-preview.module';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputHarness } from '@angular/material/input/testing';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -36,6 +35,11 @@ describe('DmpActionsComponent', () => {
       dmps: { saving: false },
     },
   };
+
+  const matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', [
+    'open',
+    'openFromComponent',
+  ]);
 
   beforeEach(waitForAsync(() => {
     backendSpy = jasmine.createSpyObj(
@@ -57,6 +61,7 @@ describe('DmpActionsComponent', () => {
       providers: [
         provideMockStore({ initialState }),
         { provide: BackendService, useValue: backendSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -101,8 +106,13 @@ describe('DmpActionsComponent', () => {
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(dialogs.length).toBe(1);
 
+    const inputs = await loader.getAllHarnesses(MatInputHarness);
+    expect(inputs.length).toBe(1);
+
+    await inputs[0].setValue('test');
+
     const buttons = await loader.getAllHarnesses(MatButtonHarness);
-    expect(buttons.length).toBe(10);
+    expect(buttons.length).toBe(11);
 
     expect(await buttons[5].getText()).toBe('button.save');
     expect(await buttons[5].isDisabled()).toBe(true);
@@ -110,7 +120,7 @@ describe('DmpActionsComponent', () => {
     await buttons[6].click();
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(store.dispatch).toHaveBeenCalledTimes(0);
-    expect(dialogs.length).toBe(1);
+    expect(dialogs.length).toBe(2);
   }));
 
   it('should call dispatchExportDmp if funderSupported is true', waitForAsync(async () => {

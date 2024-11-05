@@ -64,10 +64,11 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // the breakpoint (1300px) here can be adjusted based on design requirements or device-specific considerations.
     this.observer.observe(['(max-width: 1300px)']).subscribe(result => {
-      this.isCollapsed = result.matches;
-      this.cdr.detectChanges();
+      setTimeout(() => {
+        this.isCollapsed = result.matches;
+        this.cdr.detectChanges(); // Trigger change detection
+      });
     });
-
     this.handleRouteChange();
   }
 

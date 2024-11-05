@@ -1,6 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, Subscription, take } from 'rxjs';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   UntypedFormArray,
   UntypedFormControl,
@@ -98,6 +104,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     private backendService: BackendService,
     public store: Store<AppState>,
     private infoLabelService: InfoLabelService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.dmpForm = this.formService.dmpForm;
   }
@@ -110,6 +117,8 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.getInstruction(0);
     this.config$ = this.backendService.loadServiceConfig();
     this.getDmpById();
+    this.config$.subscribe(() => this.cdr.detectChanges());
+    this.dmpForm.valueChanges.subscribe(() => this.cdr.detectChanges());
 
     this.dmpForm.valueChanges.subscribe(value => {
       this.logger.debug(value);

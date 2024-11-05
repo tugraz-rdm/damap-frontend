@@ -1,4 +1,9 @@
 <div *ngIf="selectedView === 'primaryView'">
+  <mat-label
+    class="label-title mat-title-large"
+    id="example-radio-group-label"
+    >{{ "dmp.steps.people.general.search" | translate }}</mat-label
+  >
   <!-- CONTRIBUTORS -->
   <div [formGroup]="dmpForm">
     <ng-container formArrayName="contributors">

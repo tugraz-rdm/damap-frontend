@@ -18,7 +18,7 @@
         "instructions": "In this step, you choose a project from your institution’s project database (if integrated) or manually input your project.",
         "search": "Search project...",
         "select": "Please select the project you want to create a DMP for:",
-        "selected": "Find person and service search solutions:",
+        "selected": "Selected project:",
         "warning.dmp": "A DMP already exists for this project",
         "noprojects": "No projects are assigned to you.",
         "loading": {
@@ -35,6 +35,7 @@
         "intro": "In this step, you add people involved in the project and provide additional info about them, e.g., their role. In this example, the project leader’s info has already been added and marked as the contact person (note icon with person and envelope next to their name). You can add more contributors via the search field (ensure you select the appropriate database, e.g., ORCID), or manually via the “Add contributor manually button”. Please provide a minimum of one contact person as well as a data manager (it can be the same person).",
         "search": "Search for person...",
         "search.service": "Search service",
+        "general.search": "Find person and service search solutions:",
         "contributor": {
           "search": "Search contributor",
           "add": "Add as contributor",
@@ -201,7 +202,7 @@
         }
       },
       "storage": {
-        "label": "Storage and backup during the research process",
+        "label": "Storage and Backup",
         "greeting": "Step 5, Let’s elaborate on your storage, Firstname",
         "summaryLine": "Define who can access and modify your data and describe your storage and backup strategies.",
         "instructions": "This step helps you 1) document who is allowed to see or edit your data in the project phase and 2) find appropriate storage and backup solutions for your data.",
@@ -305,7 +306,7 @@
         "years": "Years"
       },
       "repositories": {
-        "label": "Specify repositories for publication and preservation",
+        "label": "Repositories and preservation",
         "greeting": "Step 8, Firstname",
         "summaryLine": "Choose suitable repositories for your data.",
         "instructions": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one.",
