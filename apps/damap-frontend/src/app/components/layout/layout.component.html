@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<mat-sidenav-container autosize>
   <mat-sidenav
     #sidenav
     [mode]="isSmallScreen && !isCollapsed ? 'over' : 'side'"
@@ -27,7 +27,6 @@
             class="mat-focus-indicator"
             [routerLink]="'/dashboard'">
             {{ "title" | translate }}
-            [routerLink]="'/dashboard'">
             <span *ngIf="!isCollapsed">{{ "title" | translate }}</span>
           </a>
         </div>

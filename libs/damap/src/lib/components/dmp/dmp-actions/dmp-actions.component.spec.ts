@@ -11,6 +11,7 @@ import { ExportWarningModule } from '../../../widgets/export-warning-dialog/expo
 import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
 import { FormsModule } from '@angular/forms';
 import { HarnessLoader } from '@angular/cdk/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LivePreviewComponent } from '../live-preview/live-preview.component';
 import { LivePreviewModule } from '../live-preview/live-preview.module';
 import { MatButtonHarness } from '@angular/material/button/testing';
@@ -50,10 +51,12 @@ describe('DmpActionsComponent', () => {
         NoopAnimationsModule,
         TranslateTestingModule,
         FormTestingModule,
-        LivePreviewModule,
-      ],
+        LivePreviewModule,      ],
       declarations: [DmpActionsComponent, SaveVersionDialogComponent],
-      providers: [provideMockStore({ initialState })],
+      providers: [
+        provideMockStore({ initialState }),
+        { provide: BackendService, useValue: backendSpy }
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(MockStore);

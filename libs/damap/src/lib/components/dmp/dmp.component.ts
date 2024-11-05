@@ -1,29 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router';
-<<<<<<< HEAD
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-||||||| a5ede55
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-=======
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription, take } from 'rxjs';
-import { Store } from '@ngrx/store';
->>>>>>> next
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   UntypedFormArray,
   UntypedFormControl,
@@ -38,12 +20,15 @@ import {
 import { AppState } from '../../store/states/app.state';
 import { AuthService } from '../../auth/auth.service';
 import { BackendService } from '../../services/backend.service';
+import { Config } from '../../domain/config';
 import { Contributor } from '../../domain/contributor';
 import { DataKind } from '../../domain/enum/data-kind.enum';
 import { DataSource } from '../../domain/enum/data-source.enum';
 import { Dataset } from '../../domain/dataset';
 import { FormService } from '../../services/form.service';
 import { HttpEventType } from '@angular/common/http';
+import { InfoBoxDetails } from '../../domain/infoBox-details';
+import { InfoLabelService } from '../../services/infoLabel.service';
 import { InternalStorage } from '../../domain/internal-storage';
 import { LegalEthicalAspectsComponent } from './legal-ethical-aspects/legal-ethical-aspects.component';
 import { LoggerService } from '../../services/logger.service';
@@ -55,9 +40,6 @@ import { RepoComponent } from './repo/repo.component';
 import { SpecifyDataComponent } from './specify-data/specify-data.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { Store } from '@ngrx/store';
-import { Config } from '../../domain/config';
-import { InfoLabelService } from '../../services/infoLabel.service';
-import { InfoBoxDetails } from '../../domain/infoBox-details';
 
 @Component({
   selector: 'app-dmp',
