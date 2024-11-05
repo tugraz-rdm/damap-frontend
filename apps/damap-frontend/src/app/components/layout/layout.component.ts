@@ -64,10 +64,6 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // the breakpoint (1300px) here can be adjusted based on design requirements or device-specific considerations.
     this.observer.observe(['(max-width: 1300px)']).subscribe(result => {
-      console.log(
-        'screen width is less than or equal to 1300px:',
-        result.matches,
-      );
       this.isCollapsed = result.matches;
       this.cdr.detectChanges();
     });

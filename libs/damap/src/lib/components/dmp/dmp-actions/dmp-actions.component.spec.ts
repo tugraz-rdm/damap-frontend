@@ -51,11 +51,12 @@ describe('DmpActionsComponent', () => {
         NoopAnimationsModule,
         TranslateTestingModule,
         FormTestingModule,
-        LivePreviewModule,      ],
+        LivePreviewModule,
+      ],
       declarations: [DmpActionsComponent, SaveVersionDialogComponent],
       providers: [
         provideMockStore({ initialState }),
-        { provide: BackendService, useValue: backendSpy }
+        { provide: BackendService, useValue: backendSpy },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

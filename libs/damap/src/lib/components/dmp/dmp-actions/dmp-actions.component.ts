@@ -18,6 +18,7 @@ import { AppState } from '../../../store/states/app.state';
 import { BackendService } from '../../../services/backend.service';
 import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import { ExportWarningDialogComponent } from '../../../widgets/export-warning-dialog/export-warning-dialog.component';
+import { FeedbackService } from '../../../services/feedback.service';
 import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
 import { LivePreviewComponent } from '../live-preview/live-preview.component';
@@ -50,6 +51,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private location: Location,
     private backendService: BackendService,
+    private feedbackService: FeedbackService,
   ) {
     this.dmpForm = this.formService.dmpForm;
   }
@@ -100,13 +102,15 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(versionName => {
-      if (versionName) {
+      if (versionName && versionName.length <= 255) {
         this.store.dispatch(
           saveDmpVersion({
             dmp: this.formService.exportFormToDmp(),
             versionName,
           }),
         );
+      } else {
+        this.feedbackService.error('Version name is too long');
       }
     });
   }
