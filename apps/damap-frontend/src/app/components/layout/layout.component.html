@@ -1,4 +1,4 @@
-<mat-sidenav-container autosize>
+<mat-sidenav-container>
   <mat-sidenav
     #sidenav
     [mode]="isSmallScreen && !isCollapsed ? 'over' : 'side'"
@@ -25,6 +25,8 @@
             title="Damap"
             id="damap-logo"
             class="mat-focus-indicator"
+            [routerLink]="'/dashboard'">
+            {{ "title" | translate }}
             [routerLink]="'/dashboard'">
             <span *ngIf="!isCollapsed">{{ "title" | translate }}</span>
           </a>
@@ -70,6 +72,17 @@
           <mat-icon class="menu-icon-size outline">table_view</mat-icon>
           <span *ngIf="!isCollapsed" class="menu-icon-text">{{
             "layout.menu.plans" | translate
+          }}</span>
+        </a>
+        <a
+          *ngIf="isAdmin()"
+          mat-list-item
+          [routerLink]="'/admin'"
+          routerLinkActive="active-icon material-icon-primary"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon class="menu-icon-size outline">shield_person</mat-icon>
+          <span *ngIf="!isCollapsed" class="menu-icon-text">{{
+            "layout.menu.admin" | translate
           }}</span>
         </a>
       </div>

@@ -15,10 +15,12 @@ import {
 } from '../../../store/selectors/form.selectors';
 
 import { AppState } from '../../../store/states/app.state';
+import { BackendService } from '../../../services/backend.service';
 import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import { ExportWarningDialogComponent } from '../../../widgets/export-warning-dialog/export-warning-dialog.component';
 import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
+import { LivePreviewComponent } from '../live-preview/live-preview.component';
 import { Location } from '@angular/common';
 import { selectDmpSaving } from '../../../store/selectors/dmp.selectors';
 
@@ -47,6 +49,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private store: Store<AppState>,
     private location: Location,
+    private backendService: BackendService,
   ) {
     this.dmpForm = this.formService.dmpForm;
   }
@@ -136,6 +139,34 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+  previewEnabled(): boolean {
+    return this.dmpForm.value.id !== null;
+  }
+
+  showPreview(): void {
+    if (this.dmpForm.controls.project?.getRawValue()?.funderSupported) {
+      this.backendService
+        .getTemplateType(this.dmpForm.value.id)
+        .subscribe(response => {
+          const dialogRef = this.dialog.open(LivePreviewComponent, {
+            maxHeight: '90vh',
+            maxWidth: '70vw',
+            width: '70vw',
+            height: '90vh',
+          });
+
+          dialogRef.componentInstance.selectedTemplate = response;
+        });
+    } else {
+      const dialogRef = this.dialog.open(LivePreviewComponent, {
+        maxHeight: '90vh',
+        maxWidth: '70vw',
+        width: '70vw',
+        height: '90vh',
+      });
+    }
   }
 }
 

@@ -75,11 +75,7 @@ describe('DmpComponent', () => {
         { provide: BackendService, useValue: backendSpy },
         { provide: FeedbackService, useValue: feedbackSpy },
       ],
-    })
-      .overrideComponent(DmpComponent, {
-        set: { changeDetection: ChangeDetectionStrategy.OnPush },
-      })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

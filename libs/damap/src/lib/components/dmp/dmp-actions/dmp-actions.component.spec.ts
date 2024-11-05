@@ -6,10 +6,13 @@ import {
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Subject, of } from 'rxjs';
 
+import { BackendService } from '../../../services/backend.service';
 import { ExportWarningModule } from '../../../widgets/export-warning-dialog/export-warning.module';
 import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
 import { FormsModule } from '@angular/forms';
 import { HarnessLoader } from '@angular/cdk/testing';
+import { LivePreviewComponent } from '../live-preview/live-preview.component';
+import { LivePreviewModule } from '../live-preview/live-preview.module';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
@@ -25,6 +28,7 @@ describe('DmpActionsComponent', () => {
   let fixture: ComponentFixture<DmpActionsComponent>;
   let loader: HarnessLoader;
   let store: MockStore;
+  let backendSpy: jasmine.SpyObj<BackendService>;
   const initialState = {
     damap: {
       form: { dmp: null, changed: false },
@@ -33,6 +37,10 @@ describe('DmpActionsComponent', () => {
   };
 
   beforeEach(waitForAsync(() => {
+    backendSpy = jasmine.createSpyObj(
+      Object.getOwnPropertyNames(BackendService.prototype),
+    );
+
     TestBed.configureTestingModule({
       imports: [
         ExportWarningModule,
@@ -42,6 +50,7 @@ describe('DmpActionsComponent', () => {
         NoopAnimationsModule,
         TranslateTestingModule,
         FormTestingModule,
+        LivePreviewModule,
       ],
       declarations: [DmpActionsComponent, SaveVersionDialogComponent],
       providers: [provideMockStore({ initialState })],
@@ -94,7 +103,7 @@ describe('DmpActionsComponent', () => {
     expect(await buttons[5].getText()).toBe('button.save');
     expect(await buttons[5].isDisabled()).toBe(true);
 
-    await buttons[5].click();
+    await buttons[6].click();
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
     expect(store.dispatch).toHaveBeenCalledTimes(0);
     expect(dialogs.length).toBe(1);

@@ -14,6 +14,7 @@ import { HttpBackend } from '@angular/common/http';
 import { InfoCardComponent } from '../../widgets/info-card/info-card.component';
 import { LegalEthicalAspectsModule } from './legal-ethical-aspects/legal-ethical-aspects.module';
 import { LicensesModule } from './licenses/licenses.module';
+import { LivePreviewModule } from './live-preview/live-preview.module';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
@@ -72,6 +73,9 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
     ReuseModule,
     CostsModule,
     SummaryModule,
+
+    // Live preview
+    LivePreviewModule,
     InfoCardComponent,
     // Materials
     MatStepperModule,
