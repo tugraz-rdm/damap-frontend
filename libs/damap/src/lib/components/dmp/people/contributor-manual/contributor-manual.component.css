@@ -29,6 +29,10 @@
   justify-content: center;
 }
 
+.card-container {
+  margin-top: 20px;
+}
+
 @media (max-width: 768px) {
   .form-row {
     flex-direction: column;
