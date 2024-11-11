@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup, UntypedFormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable, Subject, Subscription, filter, take } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -15,11 +16,9 @@ import {
 } from '../../../store/selectors/form.selectors';
 
 import { AppState } from '../../../store/states/app.state';
-import { BackendService } from '../../../services/backend.service';
 import { ETemplateType } from '../../../domain/enum/export-template-type.enum';
 import { ExportWarningDialogComponent } from '../../../widgets/export-warning-dialog/export-warning-dialog.component';
 import { FeedbackService } from '../../../services/feedback.service';
-import { FormGroup } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
 import { LivePreviewComponent } from '../live-preview/live-preview.component';
 import { Location } from '@angular/common';
@@ -109,7 +108,7 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
             versionName,
           }),
         );
-      } else {
+      } else if (versionName.length > 255) {
         this.feedbackService.error('Version name is too long');
       }
     });
@@ -181,10 +180,15 @@ export class DmpActionsComponent implements OnInit, OnDestroy {
 })
 export class SaveVersionDialogComponent {
   versionName = '';
+  mockControl = new UntypedFormControl();
 
   constructor(public dialogRef: MatDialogRef<SaveVersionDialogComponent>) {}
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  readInput(input: string): void {
+    this.versionName = input;
   }
 }

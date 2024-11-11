@@ -8,34 +8,40 @@
         <app-input-wrapper
           class="input-half"
           [control]="title"
-          label="{{ 'dmp.steps.project.input.button' | translate }}">
-        </app-input-wrapper>
+          label="{{
+            'dmp.steps.project.input.button' | translate
+          }}"></app-input-wrapper>
         <app-input-wrapper
           class="input-half"
           [control]="acronym"
-          label="{{ 'dmp.steps.project.input.acronym' | translate }}">
-        </app-input-wrapper>
+          label="{{
+            'dmp.steps.project.input.acronym' | translate
+          }}"></app-input-wrapper>
+        <mat-form-field class="input-fill">
+          <mat-label>{{
+            "dmp.steps.project.input.date" | translate
+          }}</mat-label>
+          <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+            <input
+              matStartDate
+              formControlName="start"
+              placeholder="Start date" />
+            <input matEndDate formControlName="end" placeholder="End date" />
+          </mat-date-range-input>
+          <mat-hint>{{
+            "dmp.steps.project.input.datehint" | translate
+          }}</mat-hint>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
       </div>
-      <mat-form-field appearance="fill" class="input-full">
-        <mat-label>{{ "dmp.steps.project.input.date" | translate }}</mat-label>
-        <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
-          <input
-            matStartDate
-            formControlName="start"
-            placeholder="Start date" />
-          <input matEndDate formControlName="end" placeholder="End date" />
-        </mat-date-range-input>
-        <mat-hint>{{
-          "dmp.steps.project.input.datehint" | translate
-        }}</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
-      </mat-form-field>
       <app-textarea-wrapper
         [control]="description"
-        label="{{ 'dmp.steps.project.input.description' | translate }}">
-      </app-textarea-wrapper>
-      <!-- Submit Button -->
+        label="{{
+          'dmp.steps.project.input.description' | translate
+        }}"></app-textarea-wrapper>
       <button
         class="button-position-left button-color-primary"
         mat-raised-button

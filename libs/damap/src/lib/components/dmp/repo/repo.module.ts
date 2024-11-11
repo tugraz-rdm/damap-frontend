@@ -30,6 +30,7 @@ import { RepoPipe } from './repo.pipe';
 import { RepoRecommendationComponent } from './repo-recommendation/repo-recommendation.component';
 import { RepoTableComponent } from './repo-table/repo-table.component';
 import { RetentionPeriodComponent } from './retention-period/retention-period.component';
+import { SharedModule } from '../../../shared/shared.module';
 import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
 import { TagModule } from '../../../widgets/tag/tag.module';
 import { ToggleButtonsModule } from '../../../widgets/toggle-buttons/toggle-buttons.module';
@@ -48,6 +49,7 @@ import { TreeSelectFormFieldModule } from '../../../widgets/tree-select-form-fie
     TagModule,
     ToggleButtonsModule,
     InfoMessageModule,
+    SharedModule,
 
     // Materials
     MatCardModule,
@@ -87,6 +89,7 @@ import { TreeSelectFormFieldModule } from '../../../widgets/tree-select-form-fie
     TagModule,
     RepoComponent,
     RepoInstructionComponent,
+    SharedModule,
 
     // Materials
     MatCardModule,
