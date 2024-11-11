@@ -6,6 +6,12 @@
 
 .storage-selected {
   flex-grow: 100;
+  margin-top: 15px;
+}
+
+.storage-textarea {
+  margin-top: 15px;
+  margin-left: 5px;
 }
 
 .storage-card-top {
@@ -17,6 +23,7 @@
 .storage-grid {
   min-width: 300px;
   width: 30%;
+  margin-top: 15px;
   max-height: 400px;
   overflow-y: scroll;
   overflow: hidden;

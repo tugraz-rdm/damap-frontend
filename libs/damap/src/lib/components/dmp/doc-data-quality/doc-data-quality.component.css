@@ -6,7 +6,7 @@
   gap: 16px;
 }
 
-.form-full-width {
+.form-full-width,
 .full-width {
   width: 100%;
 }

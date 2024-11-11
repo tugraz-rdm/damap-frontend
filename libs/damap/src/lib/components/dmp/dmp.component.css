@@ -35,7 +35,6 @@
 .verticalStepper {
   width: 100%;
 }
-
 ::ng-deep .mat-vertical-content {
   display: flex;
   padding: 20px !important;

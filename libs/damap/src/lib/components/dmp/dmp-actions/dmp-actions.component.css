@@ -19,12 +19,14 @@
 }
 
 .actions-bar {
-  position: sticky;
+  position: fixed;
+  width: 100%;
   bottom: 0;
+  left: 0;
   z-index: 10;
   background-color: var(--surface-container-high);
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
 }
 
