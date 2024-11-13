@@ -1,6 +1,6 @@
-<mat-label class="label-title mat-title-large" id="example-radio-group-label">{{
-  "dmp.steps.costs.rightLabel" | translate
-}}</mat-label>
+<mat-label class="label-title mat-title-large" id="example-radio-group-label">
+  {{ "dmp.steps.costs.rightLabel" | translate }}
+</mat-label>
 <mat-card class="data-management-costs-card card-shadow">
   <mat-card-content>
     <app-info-message>
@@ -35,7 +35,7 @@
         <mat-icon>add_circle</mat-icon>
         {{ "dmp.steps.costs.addButton" | translate }}
       </button>
-      <div [formGroup]="costsStep">
+      <div [formGroup]="costsStep" class="scrollable-cost-list">
         <mat-accordion formArrayName="list">
           <mat-expansion-panel
             *ngFor="let item of list.controls; let i = index">

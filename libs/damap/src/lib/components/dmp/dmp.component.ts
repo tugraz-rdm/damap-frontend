@@ -114,33 +114,37 @@ export class DmpComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getInstruction(0);
-    this.config$ = this.backendService.loadServiceConfig();
-    this.getDmpById();
-    this.config$.subscribe(() => this.cdr.detectChanges());
-    this.dmpForm.valueChanges.subscribe(() => this.cdr.detectChanges());
+    setTimeout(() => {
+      this.getInstruction(0);
+      this.config$ = this.backendService.loadServiceConfig();
+      this.config$.subscribe(() => this.cdr.detectChanges());
+      this.dmpForm.valueChanges.subscribe(() => this.cdr.detectChanges());
+      this.dmpForm.valueChanges.subscribe(value => {
+        this.logger.debug(value);
+        this.store.dispatch(formDiff({ newDmp: value }));
+      });
 
-    this.dmpForm.valueChanges.subscribe(value => {
-      this.logger.debug(value);
-      this.store.dispatch(formDiff({ newDmp: value }));
+      this.projectStep = this.dmpForm.get('project') as UntypedFormControl;
+      this.contributorStep = this.dmpForm.get(
+        'contributors',
+      ) as UntypedFormArray;
+      this.specifyDataStep = this.dmpForm.get('data') as UntypedFormGroup;
+      this.datasets = this.dmpForm.get('datasets') as UntypedFormArray;
+      this.docDataStep = this.dmpForm.get('documentation') as UntypedFormGroup;
+      this.legalEthicalStep = this.dmpForm.get('legal') as UntypedFormGroup;
+      this.storageStep = this.dmpForm.get('storage') as UntypedFormArray;
+      this.externalStorageStep = this.dmpForm.get(
+        'externalStorage',
+      ) as UntypedFormArray;
+      this.externalStorageInfo = this.dmpForm.get(
+        'externalStorageInfo',
+      ) as UntypedFormControl;
+      this.repoStep = this.dmpForm.get('repositories') as UntypedFormArray;
+      this.reuseStep = this.dmpForm.get('reuse') as UntypedFormGroup;
+      this.costsStep = this.dmpForm.get('costs') as UntypedFormGroup;
+
+      this.getDmpById();
     });
-
-    this.projectStep = this.dmpForm.get('project') as UntypedFormControl;
-    this.contributorStep = this.dmpForm.get('contributors') as UntypedFormArray;
-    this.specifyDataStep = this.dmpForm.get('data') as UntypedFormGroup;
-    this.datasets = this.dmpForm.get('datasets') as UntypedFormArray;
-    this.docDataStep = this.dmpForm.get('documentation') as UntypedFormGroup;
-    this.legalEthicalStep = this.dmpForm.get('legal') as UntypedFormGroup;
-    this.storageStep = this.dmpForm.get('storage') as UntypedFormArray;
-    this.externalStorageStep = this.dmpForm.get(
-      'externalStorage',
-    ) as UntypedFormArray;
-    this.externalStorageInfo = this.dmpForm.get(
-      'externalStorageInfo',
-    ) as UntypedFormControl;
-    this.repoStep = this.dmpForm.get('repositories') as UntypedFormArray;
-    this.reuseStep = this.dmpForm.get('reuse') as UntypedFormGroup;
-    this.costsStep = this.dmpForm.get('costs') as UntypedFormGroup;
   }
 
   changeStepPosition(event: StepperSelectionEvent) {
@@ -310,6 +314,7 @@ export class DmpComponent implements OnInit, OnDestroy {
         if (dmp.project?.universityId) {
           this.getProjectMembers(dmp.project.universityId);
         }
+        this.cdr.detectChanges();
       } else {
         this.router.navigate(['plans']);
       }

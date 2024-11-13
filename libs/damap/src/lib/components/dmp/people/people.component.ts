@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
@@ -76,24 +77,29 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
   constructor(
     private backendService: BackendService,
+    private cdr: ChangeDetectorRef,
     public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
-    this.configSubscription = this.config$.subscribe(config => {
-      this.serviceConfig$ = config.personSearchServiceConfigs;
-      this.serviceConfigType = config.personSearchServiceConfigs[0];
-    });
-
-    const searchSubscription = this.searchTerms
-      .pipe(debounceTime(300))
-      .subscribe((term: string) => {
-        this.searchResult$ = this.backendService.getPersonSearchResult(
-          term,
-          this.serviceConfigType.displayText,
-        );
+    setTimeout(() => {
+      this.configSubscription = this.config$.subscribe(config => {
+        this.serviceConfig$ = config.personSearchServiceConfigs;
+        this.serviceConfigType = config.personSearchServiceConfigs[0];
+        this.cdr.detectChanges(); // Manually trigger change detection
       });
-    this.subscriptions.push(searchSubscription);
+
+      const searchSubscription = this.searchTerms
+        .pipe(debounceTime(300))
+        .subscribe((term: string) => {
+          this.searchResult$ = this.backendService.getPersonSearchResult(
+            term,
+            this.serviceConfigType.displayText,
+          );
+          this.cdr.detectChanges(); // Trigger change detection after async update
+        });
+      this.subscriptions.push(searchSubscription);
+    });
   }
 
   mbox(): UntypedFormControl {

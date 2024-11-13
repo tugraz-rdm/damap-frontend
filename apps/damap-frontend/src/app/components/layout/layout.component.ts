@@ -2,6 +2,7 @@ import * as layoutTemplate from '../../../assets/i18n/layout/en.json';
 
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnDestroy,
@@ -13,18 +14,19 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Subscription, filter } from 'rxjs';
 
+import { AdminComponent } from '../../../../../../libs/damap/src/lib/components/admin/admin.component'; // eslint-disable-line
 import { ConfigService } from '../../services/config.service';
 import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dmp/dmp.component'; // eslint-disable-line
 import { MatSidenav } from '@angular/material/sidenav';
+import { PlansComponent } from '../../../../../../libs/damap/src/lib/components/plans/plans.component'; // eslint-disable-line
 import { TranslateService } from '@ngx-translate/core';
 import pkg from '../../../../../../package.json'; // eslint-disable-line
-import { AdminComponent } from '../../../../../../libs/damap/src/lib/components/admin/admin.component'; // eslint-disable-line
-import { PlansComponent } from '../../../../../../libs/damap/src/lib/components/plans/plans.component'; // eslint-disable-line
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
@@ -68,20 +70,22 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     this.observer.observe(['(max-width: 1300px)']).subscribe(result => {
       setTimeout(() => {
         this.isCollapsed = result.matches;
-        this.cdr.detectChanges(); // Trigger change detection
+        this.cdr.detectChanges();
       });
     });
     this.handleRouteChange();
   }
 
   ngAfterViewInit(): void {
-    this.handleRouteChange();
-    this.routerEventsSubscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.handleRouteChange();
-      });
-    this.checkScreenSize();
+    setTimeout(() => {
+      this.handleRouteChange();
+      this.routerEventsSubscription = this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(() => {
+          this.handleRouteChange();
+        });
+      this.checkScreenSize();
+    });
   }
 
   ngOnDestroy(): void {
@@ -129,6 +133,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataInfoService = dmpComponent.instructionStep$.subscribe(value => {
         this.greeting = this.replaceFirstname(this.name, value.greeting);
         this.summaryLine = value.summaryLine;
+        this.cdr.detectChanges();
       });
     } else if (
       componentInstance instanceof DashboardComponent ||

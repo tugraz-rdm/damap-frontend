@@ -39,3 +39,25 @@ td.mat-mdc-footer-cell:first-of-type {
 div > div > button {
   margin: 0 1em;
 }
+
+.repo-table-card {
+  max-height: calc(100vh - 200px);
+  overflow: hidden;
+}
+
+.scrollable-repo-content {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .repo-search-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .scrollable-repo-content {
+    max-height: 300px;
+  }
+}
