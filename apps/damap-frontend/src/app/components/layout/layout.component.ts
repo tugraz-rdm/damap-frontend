@@ -18,6 +18,8 @@ import { DmpComponent } from '../../../../../../libs/damap/src/lib/components/dm
 import { MatSidenav } from '@angular/material/sidenav';
 import { TranslateService } from '@ngx-translate/core';
 import pkg from '../../../../../../package.json'; // eslint-disable-line
+import { AdminComponent } from '../../../../../../libs/damap/src/lib/components/admin/admin.component'; // eslint-disable-line
+import { PlansComponent } from '../../../../../../libs/damap/src/lib/components/plans/plans.component'; // eslint-disable-line
 
 @Component({
   selector: 'app-layout',
@@ -73,6 +75,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.handleRouteChange();
     this.routerEventsSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -129,6 +132,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     } else if (
       componentInstance instanceof DashboardComponent ||
+      componentInstance instanceof PlansComponent ||
       componentInstance == null
     ) {
       // Dashboard or router not yet initialized
@@ -139,6 +143,14 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
         ' ' +
         this.templateDataLayout.layout.menu.titleDashboard;
       this.summaryLine = 'layout.menu.section';
+    } else if (componentInstance instanceof AdminComponent) {
+      this.greeting =
+        this.templateDataLayout.layout.menu.greeting +
+        ' ' +
+        this.name +
+        ' ' +
+        this.templateDataLayout.layout.menu.titleDashboard;
+      this.summaryLine = 'layout.menu.adminSection';
     }
   }
 
