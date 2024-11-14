@@ -1,5 +1,7 @@
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { By } from '@angular/platform-browser';
@@ -7,12 +9,10 @@ import { ConfigService } from '../../services/config.service';
 import { LayoutComponent } from './layout.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { TranslateTestingModule } from '@damap/core';
 import { of } from 'rxjs';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({ template: '' })
 class DummyComponent {}
@@ -36,10 +36,10 @@ describe('LayoutComponent', () => {
         root: {},
       },
       navigate: jasmine.createSpy('navigate'),
-      createUrlTree: jasmine.createSpy('createUrlTree').and.returnValue({}), // Mock createUrlTree
+      createUrlTree: jasmine.createSpy('createUrlTree').and.returnValue({}),
       serializeUrl: jasmine
         .createSpy('serializeUrl')
-        .and.returnValue('mock-url'), // Mock serializeUrl if needed
+        .and.returnValue('mock-url'),
     };
 
     const mockToken =

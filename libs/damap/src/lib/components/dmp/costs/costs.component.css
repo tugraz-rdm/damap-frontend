@@ -1,3 +1,9 @@
+.scrollable-cost-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
 mat-radio-button {
   display: flex;
   flex-direction: column;

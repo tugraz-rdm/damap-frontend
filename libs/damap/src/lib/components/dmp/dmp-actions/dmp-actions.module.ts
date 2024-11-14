@@ -5,18 +5,19 @@ import {
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LivePreviewModule } from '../live-preview/live-preview.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SaveStatusModule } from '../../../widgets/save-status/save-status.module';
-import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { LivePreviewModule } from '../live-preview/live-preview.module';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [DmpActionsComponent, SaveVersionDialogComponent],
@@ -29,6 +30,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    MatExpansionModule,
     MatTooltipModule,
   ],
   imports: [
@@ -46,6 +48,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    MatExpansionModule,
     MatTooltipModule,
   ],
 })

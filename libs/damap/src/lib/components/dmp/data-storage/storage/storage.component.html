@@ -1,4 +1,6 @@
-<app-step-intro>{{ "dmp.steps.storage.intro" | translate }}</app-step-intro>
+<mat-label class="label-title label-title" id="example-radio-group-label">{{
+  "dmp.steps.storage.intro" | translate
+}}</mat-label>
 <section class="tu-storage">
   <div class="storage-grid">
     <mat-card
@@ -7,20 +9,24 @@
         let element of activeStorages
           | storageFilter: storageStep?.getRawValue()
       "
-      class="storage-card">
+      class="storage-card card-shadow">
       <mat-card-header
         (click)="addStorage(element)"
         onKeyDown="addStorage(element)">
         <div mat-card-avatar>
           <mat-icon>folder_open</mat-icon>
         </div>
-        <mat-card-title>{{ getStorageTitle(element) }}</mat-card-title>
+        <mat-card-subtitle>{{ getStorageTitle(element) }}</mat-card-subtitle>
       </mat-card-header>
       <ng-container *ngIf="element.url">
-        <mat-card-content
-          ><a href="{{ element.url }}" target="_blank" rel="noopener">{{
-            "dmp.steps.storage.link" | translate
-          }}</a>
+        <mat-card-content>
+          <a
+            class="mat-title-small"
+            href="{{ element.url }}"
+            target="_blank"
+            rel="noopener"
+            >{{ "dmp.steps.storage.link" | translate }}</a
+          >
         </mat-card-content>
       </ng-container>
     </mat-card>
@@ -29,7 +35,8 @@
     <ng-container formArrayName="storage">
       <mat-card
         appearance="raised"
-        *ngFor="let item of storageStep?.controls; let i = index">
+        *ngFor="let item of storageStep?.controls; let i = index"
+        class="selected-storage-card card-shadow">
         <mat-card-header>
           <mat-card-title-group>
             <mat-card-title>{{ item.value.title }}</mat-card-title>

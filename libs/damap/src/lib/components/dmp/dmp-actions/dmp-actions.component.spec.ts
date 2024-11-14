@@ -6,22 +6,22 @@ import {
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Subject, of } from 'rxjs';
 
+import { BackendService } from '../../../services/backend.service';
 import { ExportWarningModule } from '../../../widgets/export-warning-dialog/export-warning.module';
 import { FormTestingModule } from '../../../testing/form-testing/form-testing.module';
 import { FormsModule } from '@angular/forms';
 import { HarnessLoader } from '@angular/cdk/testing';
+import { LivePreviewModule } from '../live-preview/live-preview.module';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputHarness } from '@angular/material/input/testing';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TranslateTestingModule } from '../../../testing/translate-testing/translate-testing.module';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { BackendService } from '../../../services/backend.service';
-import { LivePreviewModule } from '../live-preview/live-preview.module';
-import { LivePreviewComponent } from '../live-preview/live-preview.component';
 
 describe('DmpActionsComponent', () => {
   let component: DmpActionsComponent;
@@ -35,6 +35,11 @@ describe('DmpActionsComponent', () => {
       dmps: { saving: false },
     },
   };
+
+  const matSnackBarSpy = jasmine.createSpyObj('MatSnackBar', [
+    'open',
+    'openFromComponent',
+  ]);
 
   beforeEach(waitForAsync(() => {
     backendSpy = jasmine.createSpyObj(
@@ -52,12 +57,13 @@ describe('DmpActionsComponent', () => {
         FormTestingModule,
         LivePreviewModule,
       ],
-      schemas: [NO_ERRORS_SCHEMA],
       declarations: [DmpActionsComponent, SaveVersionDialogComponent],
       providers: [
         provideMockStore({ initialState }),
         { provide: BackendService, useValue: backendSpy },
+        { provide: MatSnackBar, useValue: matSnackBarSpy },
       ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     store = TestBed.inject(MockStore);
   }));
@@ -104,15 +110,17 @@ describe('DmpActionsComponent', () => {
     expect(inputs.length).toBe(1);
 
     await inputs[0].setValue('test');
+
     const buttons = await loader.getAllHarnesses(MatButtonHarness);
-    expect(buttons.length).toBe(7);
-    expect(await buttons[6].getText()).toBe('dmp.dialog.button.save');
-    expect(await buttons[6].isDisabled()).toBe(false);
+    expect(buttons.length).toBe(11);
+
+    expect(await buttons[5].getText()).toBe('button.save');
+    expect(await buttons[5].isDisabled()).toBe(true);
 
     await buttons[6].click();
     dialogs = await loader.getAllHarnesses(MatDialogHarness);
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(dialogs.length).toBe(0);
+    expect(store.dispatch).toHaveBeenCalledTimes(0);
+    expect(dialogs.length).toBe(2);
   }));
 
   it('should call dispatchExportDmp if funderSupported is true', waitForAsync(async () => {

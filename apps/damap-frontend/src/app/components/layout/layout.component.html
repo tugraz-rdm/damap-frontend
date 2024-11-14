@@ -1,9 +1,10 @@
-<mat-sidenav-container>
+<mat-sidenav-container autosize>
   <mat-sidenav
     #sidenav
     [mode]="isSmallScreen && !isCollapsed ? 'over' : 'side'"
     [opened]="true"
-    [class.collapsed]="isCollapsed"
+    [ngClass]="{ collapsed: isCollapsed }"
+    [ngStyle]="{ width: isCollapsed ? '90px' : '300px' }"
     [fixedInViewport]="true"
     [disableClose]="true"
     class="mat-sidenav">
@@ -26,7 +27,6 @@
             class="mat-focus-indicator"
             [routerLink]="'/dashboard'">
             {{ "title" | translate }}
-            [routerLink]="'/dashboard'">
             <span *ngIf="!isCollapsed">{{ "title" | translate }}</span>
           </a>
         </div>
@@ -143,10 +143,8 @@
     <mat-toolbar class="toolbar">
       <mat-toolbar-row id="mainHeader">
         <div class="header-container">
-          <div class="header-title">
-            <h1>
-              {{ greeting | translate }}
-            </h1>
+          <div class="header-title mat-title-large">
+            {{ greeting | translate }}
             <div class="paragraph-section mat-title-medium">
               {{ summaryLine | translate }}
             </div>

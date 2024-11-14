@@ -26,6 +26,7 @@ export class StorageComponent implements OnInit {
 
   internalStorages: InternalStorage[] = [];
   internalStoragesLoaded: LoadingState;
+  showAdditionalStorage: boolean = false;
 
   constructor(private store: Store<AppState>) {}
 
