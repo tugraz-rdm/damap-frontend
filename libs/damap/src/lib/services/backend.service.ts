@@ -18,7 +18,10 @@ import { DmpListItem } from '../domain/dmp-list-item';
 import { FeedbackService } from './feedback.service';
 import { Gdpr } from '../domain/gdpr';
 import { Injectable } from '@angular/core';
-import { InternalStorage } from '../domain/internal-storage';
+import {
+  InternalStorage,
+  InternalStorageTranslation,
+} from '../domain/internal-storage';
 import { Observable } from 'rxjs';
 import { Project } from '../domain/project';
 import { RepositoryDetails } from '../domain/repository-details';
@@ -210,7 +213,9 @@ export class BackendService {
   getInternalStorages(): Observable<InternalStorage[]> {
     const langCode = 'eng'; // TODO: Replace with template lang in the future
     return this.http
-      .get<InternalStorage[]>(`${this.backendUrl}storages/${langCode}`)
+      .get<
+        InternalStorage[]
+      >(`${this.backendUrl}storages?languageCode=${langCode}`)
       .pipe(retry(3), catchError(this.handleError('http.error.storages')));
   }
 
@@ -287,6 +292,17 @@ export class BackendService {
       });
   }
 
+  getPreviewPDF(dmpId: number, template: string): Observable<Blob> {
+    return this.http
+      .get(
+        `${this.backendUrl}document/${dmpId}/export?template=${template}&download=false&filetype=pdf`,
+        {
+          responseType: 'blob',
+        },
+      )
+      .pipe(catchError(this.handleError('http.error.document')));
+  }
+
   getDmpDocument(id: number): void {
     this.http
       .get(`${this.backendUrl}document/${id}`, {
@@ -327,6 +343,96 @@ export class BackendService {
 
   getGdpr(): Observable<Gdpr[]> {
     return this.http.get<Gdpr[]>(`${this.backendUrl}gdpr/extended`);
+  }
+
+  getTemplateType(dmpId: number): Observable<string> {
+    return this.http
+      .get<string>(`${this.backendUrl}document/${dmpId}/template_type`)
+      .pipe(retry(3), catchError(this.handleError('http.error.template')));
+  }
+
+  createInternalStorage(storage: InternalStorage): Observable<InternalStorage> {
+    return this.http.post<InternalStorage>(
+      `${this.backendUrl}storages`,
+      storage,
+    );
+  }
+
+  getInternalStorage(id: number): Observable<InternalStorage> {
+    return this.http.get<InternalStorage>(`${this.backendUrl}storages/${id}`);
+  }
+
+  updateInternalStorage(storage: InternalStorage): Observable<InternalStorage> {
+    return this.http.put<InternalStorage>(
+      `${this.backendUrl}storages/${storage.id}`,
+      storage,
+    );
+  }
+
+  deleteInternalStorage(id: number): Observable<InternalStorage> {
+    return this.http.delete<InternalStorage>(
+      `${this.backendUrl}storages/${id}`,
+    );
+  }
+
+  searchInternalStorage(queryParams: {
+    [key: string]: string[];
+  }): Observable<SearchResult<InternalStorage>> {
+    let params = new HttpParams();
+    for (const key in queryParams) {
+      if (queryParams.hasOwnProperty(key)) {
+        queryParams[key]?.forEach(item => (params = params.append(key, item)));
+      }
+    }
+    return this.http.get<SearchResult<InternalStorage>>(
+      `${this.backendUrl}storages`,
+      {
+        params,
+      },
+    );
+  }
+
+  createInternalStorageTranslation(
+    translation: InternalStorageTranslation,
+  ): Observable<InternalStorageTranslation> {
+    return this.http.post<InternalStorageTranslation>(
+      `${this.backendUrl}storages/${translation.storageId}/translations`,
+      translation,
+    );
+  }
+
+  getInternalStorageTranslations(
+    id: number,
+  ): Observable<InternalStorageTranslation[]> {
+    return this.http.get<InternalStorageTranslation[]>(
+      `${this.backendUrl}storages/${id}/translations/`,
+    );
+  }
+
+  updateInternalStorageTranslation(
+    translation: InternalStorageTranslation,
+  ): Observable<InternalStorageTranslation> {
+    return this.http.put<InternalStorageTranslation>(
+      `${this.backendUrl}storages/${translation.storageId}/translations/${translation.id}`,
+      translation,
+    );
+  }
+
+  deleteInternalStorageTranslation(
+    storageId: number,
+    id: number,
+  ): Observable<InternalStorageTranslation> {
+    return this.http.delete<InternalStorageTranslation>(
+      `${this.backendUrl}storages/${storageId}/translations/${id}`,
+    );
+  }
+
+  getAllInternalStorageTranslationsForStorage(
+    id: number,
+  ): Observable<InternalStorageTranslation[]> {
+    return this.http.get<InternalStorageTranslation[]>(
+      `${this.backendUrl}storages/${id}/translations/`,
+    );
   }
 
   private handleError(message = 'http.error.standard') {

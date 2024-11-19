@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
@@ -72,26 +73,33 @@ export class PeopleComponent implements OnInit, OnDestroy {
     ]),
   });
 
+  selectedView: 'primaryView' | 'secondaryView' = 'primaryView';
+
   constructor(
     private backendService: BackendService,
+    private cdr: ChangeDetectorRef,
     public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
-    this.configSubscription = this.config$.subscribe(config => {
-      this.serviceConfig$ = config.personSearchServiceConfigs;
-      this.serviceConfigType = config.personSearchServiceConfigs[0];
-    });
-
-    const searchSubscription = this.searchTerms
-      .pipe(debounceTime(300))
-      .subscribe((term: string) => {
-        this.searchResult$ = this.backendService.getPersonSearchResult(
-          term,
-          this.serviceConfigType.displayText,
-        );
+    setTimeout(() => {
+      this.configSubscription = this.config$.subscribe(config => {
+        this.serviceConfig$ = config.personSearchServiceConfigs;
+        this.serviceConfigType = config.personSearchServiceConfigs[0];
+        this.cdr.detectChanges(); // Manually trigger change detection
       });
-    this.subscriptions.push(searchSubscription);
+
+      const searchSubscription = this.searchTerms
+        .pipe(debounceTime(300))
+        .subscribe((term: string) => {
+          this.searchResult$ = this.backendService.getPersonSearchResult(
+            term,
+            this.serviceConfigType.displayText,
+          );
+          this.cdr.detectChanges(); // Trigger change detection after async update
+        });
+      this.subscriptions.push(searchSubscription);
+    });
   }
 
   mbox(): UntypedFormControl {
@@ -194,6 +202,10 @@ export class PeopleComponent implements OnInit, OnDestroy {
   private getDatasetsForContributor(contributor: Contributor): Dataset[] {
     const datasets = this.dmpForm.controls.datasets.value;
     return datasets.filter(item => item.deletionPerson?.id === contributor?.id);
+  }
+
+  onViewChange(view: 'primaryView' | 'secondaryView'): void {
+    this.selectedView = view;
   }
 }
 

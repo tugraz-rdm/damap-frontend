@@ -18,7 +18,7 @@
         "instructions": "In this step, you choose a project from your institution’s project database (if integrated) or manually input your project.",
         "search": "Search project...",
         "select": "Please select the project you want to create a DMP for:",
-        "selected": "You selected",
+        "selected": "Selected project:",
         "warning.dmp": "A DMP already exists for this project",
         "noprojects": "No projects are assigned to you.",
         "loading": {
@@ -28,13 +28,16 @@
       },
       "people": {
         "label": "People involved in data management",
+        "rightLabel": "Identify data management contributors",
         "greeting": "Welcome to Step 2, Firstname",
         "summaryLine": "Identify team members in your project.",
         "instructions": "In this step, you add individuals to the project and provide additional information about them, for example, their role in the project. To mark someone as the contact person click the person-with-envelope icon next to their role. You can change the existing information and add more contributors via the search (choose a search service and start typing the name). Please provide a minimum of one contact person as well as a data manager (it can be the same person).",
         "intro": "In this step, you add people involved in the project and provide additional info about them, e.g., their role. In this example, the project leader’s info has already been added and marked as the contact person (note icon with person and envelope next to their name). You can add more contributors via the search field (ensure you select the appropriate database, e.g., ORCID), or manually via the “Add contributor manually button”. Please provide a minimum of one contact person as well as a data manager (it can be the same person).",
         "search": "Search for person...",
         "search.service": "Search service",
+        "general.search": "Find person and service search solutions:",
         "contributor": {
+          "search": "Search contributor",
           "add": "Add as contributor",
           "remove": "Remove from contributors",
           "role": "Role",
@@ -162,9 +165,10 @@
           }
         },
         "reuse": {
+          "rightLabel": "Data reuse planning",
           "label": "Reuse of data",
           "greeting": "On to Step 9, Firstname",
-          "summaryLine": "Image/Describe potential reuse opportunities of your data. or  Imagine/Describe conceivable purposes for the reuse of your data.",
+          "summaryLine": "Consider potential research uses and users of your data sets.",
           "instructions": "This step helps you think about future research uses or users of your data and what potential users may require to access your data.",
           "intro": "This step helps you to think about foreseeable research uses or users of your data sets and what potential reusers require to access your data.",
           "question": {
@@ -199,11 +203,11 @@
         }
       },
       "storage": {
-        "label": "Storage and backup during the research process",
+        "label": "Storage and Backup",
         "greeting": "Step 5, Let’s elaborate on your storage, Firstname",
         "summaryLine": "Define who can access and modify your data and describe your storage and backup strategies.",
         "instructions": "This step helps you 1) document who is allowed to see or edit your data in the project phase and 2) find appropriate storage and backup solutions for your data.",
-        "intro": "Choose the best storage option for each dataset.",
+        "intro": "Choose the best storage option for each dataset:",
         "link": "More information...",
         "question": {
           "datasets": "Select corresponding datasets"
@@ -274,6 +278,7 @@
       },
       "licensing": {
         "label": "Data access and licensing",
+        "rightLabel": "Access control and licensing overview",
         "greeting": "Advancing to Step 7, Firstname",
         "summaryLine": "Elaborate on future access to your data. ",
         "instructions": "This step helps you to specify the access to your research output in the future: Which of your datasets will be published, which will be provided to interested persons on request only, and which need to be under lock and key, for contractual, regulatory, or ethical reasons? It also reminds you to choose a license for your open data that clearly describes the reuse conditions for potential users. To comply with the FAIR principles, metadata should be published, even if the data is closed or restricted.",
@@ -302,7 +307,7 @@
         "years": "Years"
       },
       "repositories": {
-        "label": "Specify repositories for publication and preservation",
+        "label": "Repositories and preservation",
         "greeting": "Step 8, Firstname",
         "summaryLine": "Choose suitable repositories for your data.",
         "instructions": "Repositories are used for sustainable data management beyond the lifetime of the project and to make data discoverable and reusable to others. If available, use a domain specific repository for your data. The search filter below may help you to find one.",
@@ -345,6 +350,8 @@
       },
       "costs": {
         "label": "Costs",
+        "rightLabel": "Data management costs",
+        "addButton": "Add cost",
         "greeting": "Step 10, you’re almost there, Firstname!",
         "summaryLine": "Estimate the costs for data management in this project. ",
         "instructions": "In this step, you will provide information on the resources required to manage your data and a clear statement on how these costs will be covered.",
@@ -403,7 +410,8 @@
           "contributor": {
             "none": "No contributors selected yet.",
             "one": "One contributor selected.",
-            "multiple": "Contributors selected: "
+            "multiple": "Contributors selected: ",
+            "additional": "Additional contributors:"
           }
         },
         "data": {
@@ -466,10 +474,15 @@
     }
   },
   "button": {
+    "actions": "Actions",
     "save": "Save changes",
     "discard": "Discard changes",
     "version": "Save new version",
-    "export": "Export document"
+    "export": "Export document",
+    "preview": {
+      "tooltipDisabled": "Please save the DMP before being able to preview it.",
+      "content": "Show preview"
+    }
   },
   "form": {
     "error": {
@@ -939,5 +952,12 @@
   "fair": "FAIR",
   "contenttypes": "Content types",
   "metadatastandards": "Metadata standards",
-  "or": "or"
+  "or": "or",
+  "preview": {
+    "title": "Live Preview",
+    "info": "Only data that has been saved will be displayed in the preview, if you are missing recent changes please save your DMP first.",
+    "templateSelection": "Choose preview format",
+    "loading": "Loading",
+    "requestTemplateSelection": "Please select a template in the dropdown"
+  }
 }

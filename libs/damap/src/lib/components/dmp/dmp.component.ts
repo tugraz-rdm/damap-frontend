@@ -1,7 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { BehaviorSubject, Observable, Subject, Subscription, take } from 'rxjs';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   UntypedFormArray,
   UntypedFormControl,
@@ -16,20 +21,26 @@ import {
 import { AppState } from '../../store/states/app.state';
 import { AuthService } from '../../auth/auth.service';
 import { BackendService } from '../../services/backend.service';
+import { Config } from '../../domain/config';
 import { Contributor } from '../../domain/contributor';
 import { DataKind } from '../../domain/enum/data-kind.enum';
 import { DataSource } from '../../domain/enum/data-source.enum';
 import { Dataset } from '../../domain/dataset';
 import { FormService } from '../../services/form.service';
 import { HttpEventType } from '@angular/common/http';
+import { InfoBoxDetails } from '../../domain/infoBox-details';
+import { InfoLabelService } from '../../services/infoLabel.service';
 import { InternalStorage } from '../../domain/internal-storage';
+import { LegalEthicalAspectsComponent } from './legal-ethical-aspects/legal-ethical-aspects.component';
 import { LoggerService } from '../../services/logger.service';
 import { MatStepper } from '@angular/material/stepper';
+import { PeopleComponent } from './people/people.component';
 import { Project } from '../../domain/project';
+import { ProjectComponent } from './project/project.component';
+import { RepoComponent } from './repo/repo.component';
+import { SpecifyDataComponent } from './specify-data/specify-data.component';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { Config } from '../../domain/config';
-import { InfoLabelService } from '../../services/infoLabel.service';
-import { InfoBoxDetails } from '../../domain/infoBox-details';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-dmp',
@@ -38,6 +49,14 @@ import { InfoBoxDetails } from '../../domain/infoBox-details';
 })
 export class DmpComponent implements OnInit, OnDestroy {
   config$: Observable<Config> = new Observable<Config>();
+  @ViewChild('projectComponent') projectComponent: ProjectComponent;
+  @ViewChild('peopleComponent') peopleComponent: PeopleComponent;
+  @ViewChild('specifyData') specifyDataComponent: SpecifyDataComponent;
+  @ViewChild('legalEthicalAspects')
+  legalEthicalAspectsComponent: LegalEthicalAspectsComponent;
+  @ViewChild('repo') repoComponent: RepoComponent;
+
+  selectedViewStorage: 'primaryView' | 'secondaryView' = 'primaryView';
 
   get username(): string {
     return this.auth.getUsername();
@@ -74,6 +93,7 @@ export class DmpComponent implements OnInit, OnDestroy {
 
   instructionStep$ = new BehaviorSubject<any>('');
   infoInstruction: InfoBoxDetails = {};
+  selectedStep: number = 0;
 
   constructor(
     private logger: LoggerService,
@@ -84,36 +104,47 @@ export class DmpComponent implements OnInit, OnDestroy {
     private backendService: BackendService,
     public store: Store<AppState>,
     private infoLabelService: InfoLabelService,
+    private cdr: ChangeDetectorRef,
   ) {
     this.dmpForm = this.formService.dmpForm;
   }
 
+  onStepChange(selectedStep: number) {
+    this.selectedStep = selectedStep;
+  }
+
   ngOnInit() {
-    this.getIntruction(0);
-    this.config$ = this.backendService.loadServiceConfig();
-    this.getDmpById();
+    setTimeout(() => {
+      this.getInstruction(0);
+      this.config$ = this.backendService.loadServiceConfig();
+      this.config$.subscribe(() => this.cdr.detectChanges());
+      this.dmpForm.valueChanges.subscribe(() => this.cdr.detectChanges());
+      this.dmpForm.valueChanges.subscribe(value => {
+        this.logger.debug(value);
+        this.store.dispatch(formDiff({ newDmp: value }));
+      });
 
-    this.dmpForm.valueChanges.subscribe(value => {
-      this.logger.debug(value);
-      this.store.dispatch(formDiff({ newDmp: value }));
+      this.projectStep = this.dmpForm.get('project') as UntypedFormControl;
+      this.contributorStep = this.dmpForm.get(
+        'contributors',
+      ) as UntypedFormArray;
+      this.specifyDataStep = this.dmpForm.get('data') as UntypedFormGroup;
+      this.datasets = this.dmpForm.get('datasets') as UntypedFormArray;
+      this.docDataStep = this.dmpForm.get('documentation') as UntypedFormGroup;
+      this.legalEthicalStep = this.dmpForm.get('legal') as UntypedFormGroup;
+      this.storageStep = this.dmpForm.get('storage') as UntypedFormArray;
+      this.externalStorageStep = this.dmpForm.get(
+        'externalStorage',
+      ) as UntypedFormArray;
+      this.externalStorageInfo = this.dmpForm.get(
+        'externalStorageInfo',
+      ) as UntypedFormControl;
+      this.repoStep = this.dmpForm.get('repositories') as UntypedFormArray;
+      this.reuseStep = this.dmpForm.get('reuse') as UntypedFormGroup;
+      this.costsStep = this.dmpForm.get('costs') as UntypedFormGroup;
+
+      this.getDmpById();
     });
-
-    this.projectStep = this.dmpForm.get('project') as UntypedFormControl;
-    this.contributorStep = this.dmpForm.get('contributors') as UntypedFormArray;
-    this.specifyDataStep = this.dmpForm.get('data') as UntypedFormGroup;
-    this.datasets = this.dmpForm.get('datasets') as UntypedFormArray;
-    this.docDataStep = this.dmpForm.get('documentation') as UntypedFormGroup;
-    this.legalEthicalStep = this.dmpForm.get('legal') as UntypedFormGroup;
-    this.storageStep = this.dmpForm.get('storage') as UntypedFormArray;
-    this.externalStorageStep = this.dmpForm.get(
-      'externalStorage',
-    ) as UntypedFormArray;
-    this.externalStorageInfo = this.dmpForm.get(
-      'externalStorageInfo',
-    ) as UntypedFormControl;
-    this.repoStep = this.dmpForm.get('repositories') as UntypedFormArray;
-    this.reuseStep = this.dmpForm.get('reuse') as UntypedFormGroup;
-    this.costsStep = this.dmpForm.get('costs') as UntypedFormGroup;
   }
 
   changeStepPosition(event: StepperSelectionEvent) {
@@ -147,9 +178,16 @@ export class DmpComponent implements OnInit, OnDestroy {
       this.datasets.length
     );
   }
-  changeStep($event) {
+
+  changeStep($event: StepperSelectionEvent) {
     this.stepChanged$.next($event);
-    this.getIntruction($event.selectedIndex);
+    this.getInstruction($event.selectedIndex);
+  }
+
+  handleStepChange(event: StepperSelectionEvent) {
+    this.changeStep(event);
+    this.changeStepPosition(event);
+    this.onStepChange(event.selectedIndex);
   }
 
   changeProject(project: Project) {
@@ -260,6 +298,10 @@ export class DmpComponent implements OnInit, OnDestroy {
     this.formService.removeCostFromForm(index);
   }
 
+  onViewChangeStorage(view: 'primaryView' | 'secondaryView'): void {
+    this.selectedViewStorage = view;
+  }
+
   private getDmpById() {
     const id = +this.route.snapshot.paramMap.get('id');
     if (!id) return;
@@ -272,6 +314,7 @@ export class DmpComponent implements OnInit, OnDestroy {
         if (dmp.project?.universityId) {
           this.getProjectMembers(dmp.project.universityId);
         }
+        this.cdr.detectChanges();
       } else {
         this.router.navigate(['plans']);
       }
@@ -288,7 +331,7 @@ export class DmpComponent implements OnInit, OnDestroy {
     return this.username + (+new Date()).toString(36);
   }
 
-  getIntruction(index: number) {
+  getInstruction(index: number) {
     this.infoInstruction = this.infoLabelService.getInfo(index);
     this.instructionStep$.next(this.infoInstruction);
   }

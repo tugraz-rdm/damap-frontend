@@ -8,14 +8,6 @@ tr.detail-row {
   height: 0;
 }
 
-tr.element-row:not(.expanded-row):hover {
-  background: var(--surface-container-low);
-}
-
-tr.element-row:not(.expanded-row):active {
-  background: var(--surface-container-high);
-}
-
 .element-row td {
   border-bottom-width: 0;
 }
@@ -43,6 +35,7 @@ tr.element-row:not(.expanded-row):active {
 
 .mat-column-dataset,
 .mat-column-source,
+.mat-column-fileFormat,
 .mat-column-description {
   max-width: 20vw;
   word-wrap: break-word;

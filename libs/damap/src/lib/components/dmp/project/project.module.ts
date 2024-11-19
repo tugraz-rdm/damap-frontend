@@ -1,16 +1,26 @@
-import { CommonModule } from '@angular/common';
-import { ErrorMessageModule } from '../../../widgets/error-message/error-message.module';
-import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MAT_MOMENT_DATE_FORMATS,
+  MatMomentDateModule,
+  MomentDateAdapter,
+} from '@angular/material-moment-adapter';
+
+import { CommonModule } from '@angular/common';
+import { ErrorMessageModule } from '../../../widgets/error-message/error-message.module';
+import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
 import { ManualProjectInputComponent } from './manual-project-input/manual-project-input.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+  MatFormFieldModule,
+} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -18,15 +28,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgModule } from '@angular/core';
 import { ProjectComponent } from './project.component';
+import { ProjectInstructionComponent } from './project-instruction/project-instruction.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { ToggleButtonsModule } from '../../../widgets/toggle-buttons/toggle-buttons.module';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-  MAT_MOMENT_DATE_FORMATS,
-  MatMomentDateModule,
-  MomentDateAdapter,
-} from '@angular/material-moment-adapter';
 
 @NgModule({
   imports: [
@@ -35,6 +41,7 @@ import {
     ErrorMessageModule,
     SharedModule,
     InfoMessageModule,
+    ToggleButtonsModule,
 
     // Materials
     MatCardModule,
@@ -52,6 +59,7 @@ import {
     ProjectComponent,
     ManualProjectInputComponent,
     ProjectListComponent,
+    ProjectInstructionComponent,
   ],
   exports: [
     CommonModule,
@@ -60,8 +68,8 @@ import {
     SharedModule,
     ProjectComponent,
     InfoMessageModule,
-
-    // Materials
+    ProjectComponent,
+    ProjectInstructionComponent,
     MatCardModule,
     MatButtonModule,
     MatProgressBarModule,
@@ -81,6 +89,10 @@ import {
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
   ],
 })
 export class ProjectModule {}

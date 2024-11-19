@@ -3,7 +3,8 @@
     #sidenav
     [mode]="isSmallScreen && !isCollapsed ? 'over' : 'side'"
     [opened]="true"
-    [class.collapsed]="isCollapsed"
+    [ngClass]="{ collapsed: isCollapsed }"
+    [ngStyle]="{ width: isCollapsed ? '90px' : '300px' }"
     [fixedInViewport]="true"
     [disableClose]="true"
     class="mat-sidenav">
@@ -25,6 +26,7 @@
             id="damap-logo"
             class="mat-focus-indicator"
             [routerLink]="'/dashboard'">
+            {{ "title" | translate }}
             <span *ngIf="!isCollapsed">{{ "title" | translate }}</span>
           </a>
         </div>
@@ -69,6 +71,17 @@
           <mat-icon class="menu-icon-size outline">table_view</mat-icon>
           <span *ngIf="!isCollapsed" class="menu-icon-text">{{
             "layout.menu.plans" | translate
+          }}</span>
+        </a>
+        <a
+          *ngIf="isAdmin()"
+          mat-list-item
+          [routerLink]="'/admin'"
+          routerLinkActive="active-icon material-icon-primary"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon class="menu-icon-size outline">shield_person</mat-icon>
+          <span *ngIf="!isCollapsed" class="menu-icon-text">{{
+            "layout.menu.admin" | translate
           }}</span>
         </a>
       </div>
@@ -138,10 +151,8 @@
     <mat-toolbar class="toolbar">
       <mat-toolbar-row id="mainHeader">
         <div class="header-container">
-          <div class="header-title">
-            <h1>
-              {{ greeting | translate }}
-            </h1>
+          <div class="header-title mat-title-large">
+            {{ greeting | translate }}
             <div class="paragraph-section mat-title-medium">
               {{ summaryLine | translate }}
             </div>

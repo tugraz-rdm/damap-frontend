@@ -33,3 +33,7 @@
   height: 20px;
   width: 20px;
 }
+
+.no-resize {
+  resize: none;
+}

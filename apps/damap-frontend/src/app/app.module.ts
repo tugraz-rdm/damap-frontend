@@ -1,5 +1,5 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { AuthGuard, EnvBannerModule } from '@damap/core';
+import { EnvBannerModule, AuthGuard } from '@damap/core';
 import { HttpBackend, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
@@ -20,17 +20,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TuGrazAuthService } from './services/tugrazAuth.service';
 import { environment } from '../environments/environment';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
   return new MultiTranslateHttpLoader(http, [
     '/assets/i18n/layout/',
     '/assets/i18n/consent/',
+    '/assets/i18n/landing-page/',
     '/assets/damap-core/i18n/dashboard/',
     '/assets/damap-core/i18n/plans/',
     '/assets/damap-core/i18n/http/',
     '/assets/damap-core/i18n/gdpr/',
+    '/assets/damap-core/i18n/admin/',
     '/assets/damap-core/i18n/',
+    '/assets/damap-core/i18n/templates/',
     '/assets/i18n/',
   ]);
 }
@@ -76,6 +80,10 @@ export function HttpLoaderFactory(http: HttpBackend): MultiTranslateHttpLoader {
         configService.initializeApp(),
       multi: true,
       deps: [ConfigService],
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
     },
     AuthGuard,
     ConsentGuard,
