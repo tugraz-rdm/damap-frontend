@@ -63,6 +63,7 @@ describe('ConfigService', () => {
         personSearchServiceConfigs: [],
         fitsServiceAvailable: false,
         livePreviewAvailable: true,
+        ethicalReportEnabled: true,
       };
 
       mockOAuthService.loadDiscoveryDocumentAndTryLogin.and.returnValue(
@@ -136,6 +137,7 @@ describe('ConfigService', () => {
         personSearchServiceConfigs: [],
         fitsServiceAvailable: false,
         livePreviewAvailable: true,
+        ethicalReportEnabled: true,
       };
 
       service['config'] = mockConfig;
