@@ -99,6 +99,7 @@
           "tab": {
             "manual": "Manually",
             "upload": "Upload sample data",
+            "cancel": "Cancel",
             "doi": "Enter DOI",
             "access": "Access rights",
             "storage": "Storage",
@@ -113,7 +114,7 @@
           "table": {
             "heading": {
               "default": "Data",
-              "reused": "Reused data",
+              "reused": "Existing data",
               "new": "New data"
             },
             "header": {

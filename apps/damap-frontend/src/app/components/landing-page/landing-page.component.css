@@ -1,9 +1,9 @@
 .background {
   background: url("../../../assets/landing-page-background.png");
-  background-color: var(--accent-color-very-light);
+  background-color: var(--landing-page-background-color);
   background-repeat: no-repeat;
   background-position: right top;
-  height: 100%;
+  height: 100vh;
   width: 100%;
 }
 

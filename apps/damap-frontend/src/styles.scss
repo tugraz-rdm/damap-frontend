@@ -80,6 +80,12 @@
       40
     )};
 
+  --landing-page-background-color: #{mat.get-theme-color(
+      $app-light-theme,
+      neutral,
+      98
+    )};
+
   // mat3 provides colors for error states, but not for success or warning...
   // so it is set to predefined values here
   --success-container: #e9f5d2;
