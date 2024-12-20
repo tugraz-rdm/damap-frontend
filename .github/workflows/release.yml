@@ -10,7 +10,7 @@ on:
       - prod
       - test
     tags:
-      - v*  
+      - v*
   workflow_dispatch:
 
 jobs:
