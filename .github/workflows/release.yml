@@ -9,6 +9,8 @@ on:
     branches:
       - prod
       - test
+    tags:
+      - v*  
   workflow_dispatch:
 
 jobs:
