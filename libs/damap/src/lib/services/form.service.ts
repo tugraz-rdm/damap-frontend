@@ -22,6 +22,8 @@ import { Storage } from '../domain/storage';
 import { ccBy } from '../widgets/license-wizard/license-wizard-list';
 import { currencyValidator } from '../validators/currency.validator';
 import { notEmptyValidator } from '../validators/not-empty.validator';
+import { urlValidator } from '../validators/url.validator';
+import { uriValidator } from '../validators/uri.validator';
 
 @Injectable({
   providedIn: 'root',
@@ -114,6 +116,7 @@ export class FormService {
         ethicalIssuesCris: [null],
         committeeReviewed: [false],
         committeeReviewedCris: [null],
+        ethicalIssuesReport: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       }),
       repositories: this.formBuilder.array([]),
       reuse: this.formBuilder.group({
@@ -173,6 +176,7 @@ export class FormService {
         ethicalIssuesCris: dmp.ethicalIssuesExistCris,
         committeeReviewed: dmp.committeeReviewed,
         committeeReviewedCris: dmp.committeeReviewedCris,
+        ethicalIssuesReport: dmp.ethicalIssuesReport,
       },
       reuse: {
         targetAudience: dmp.targetAudience,
@@ -274,6 +278,7 @@ export class FormService {
       tools: formValue.reuse.tools,
       id: formValue.id,
       project: formValue.project,
+      ethicalIssuesReport: formValue.legal.ethicalIssuesReport,
     };
   }
 
@@ -438,7 +443,7 @@ export class FormService {
       dataAccess: [DataAccessType.OPEN],
       referenceHash: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       selectedProjectMembersAccess: [AccessRight.WRITE],
-      otherProjectMembersAccess: [AccessRight.WRITE],
+      otherProjectMembersAccess: [AccessRight.READ],
       publicAccess: [AccessRight.NONE],
       delete: [false],
       dateOfDeletion: [null],
@@ -478,6 +483,36 @@ export class FormService {
         ],
       ],
       active: [true],
+    });
+  }
+
+  public createBannerFormGroup(): UntypedFormGroup {
+    return this.formBuilder.group({
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
+      dismissible: [true],
+      color: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(this.TEXT_SHORT_LENGTH),
+          notEmptyValidator(),
+        ],
+      ],
     });
   }
 
