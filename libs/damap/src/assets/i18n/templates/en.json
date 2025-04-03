@@ -35,7 +35,8 @@
         "intro": "In this step, you add people involved in the project and provide additional info about them, e.g., their role. In this example, the project leader’s info has already been added and marked as the contact person (note icon with person and envelope next to their name). You can add more contributors via the search field (ensure you select the appropriate database, e.g., ORCID), or manually via the “Add contributor manually button”. Please provide a minimum of one contact person as well as a data manager (it can be the same person).",
         "search": "Search for person...",
         "search.service": "Search service",
-        "general.search": "Find person and service search solutions:",
+        "general.search": "Find Contributors",
+        "general.recommendations": "Recommended contributors:",
         "contributor": {
           "search": "Search contributor",
           "add": "Add as contributor",
@@ -45,15 +46,19 @@
         },
         "contact": {
           "person": "Contact person",
+          "contributor": "Change to contributor",
           "add": "Set as contact",
-          "remove": "Remove as contact",
+          "remove": "Remove contact person",
           "edit": "Edit contact person",
+          "editContributor": "Edit contributor",
           "update": "Update",
-          "cancel": "Cancel"
+          "cancel": "Cancel",
+          "title": "Project contact",
+          "info": "Select a contact from the list of contributors using the button"
         },
         "manual.input": {
           "show": "Add contributor manually",
-          "hide": "Hide manual contributor input",
+          "hide": "Input contributor manually",
           "tooltip": "Use to add project contributor not found in database above",
           "question": {
             "firstname": "First name",
@@ -62,7 +67,7 @@
             "orcid": "ORCID ID"
           }
         },
-        "nopeople": "No project members available.",
+        "nopeople": "No recommended contributors available",
         "confirm.dialog": {
           "heading": "Remove contributor",
           "question": "Are you sure you want to remove this contributor?\n  They are responsible for the deletion of the following datasets:",
@@ -131,18 +136,22 @@
           "dialog": {
             "add": "Add dataset",
             "edit": "Edit dataset",
+            "view": "View dataset",
             "title": "Dataset title",
             "fileFormat": "File Format",
             "fileFormat.info": "Specify mime type (e.g. image/png) or file format (png)",
             "type": "Estimated type",
             "size": "Estimated size",
             "description": "Description",
+            "technicalResource": "Technical Resource",
             "source": "Source",
             "identifier": "Identifier",
             "button": {
+              "addTechnicalResource": "Add new technical resource",
               "add": "Add",
               "update": "Update",
-              "cancel": "Cancel"
+              "cancel": "Cancel",
+              "close": "Close"
             }
           },
           "doi": {
@@ -274,7 +283,8 @@
               "link": "https://www.tugraz.at/tu-graz/organisationsstruktur/vertretungen-der-tu-graz-angehoerigen/commission-for-scientific-integrity-and-ethics"
             },
             "suffix": ", or a similar body?"
-          }
+          },
+          "ethicalIssueReport": "Please provide the ethical issue report."
         }
       },
       "licensing": {
@@ -360,7 +370,7 @@
           "description": "Researchers are encouraged to consider costs arising from data management activities. Data management costs are eligible for many funders and are thus relevant for the proposals. Please follow this",
           "links": [
             {
-              "url": "https://www.tuwien.at/en/research/rti-support/research-data/rdm-infos-tips/cost-calculation",
+              "url": "https://www.tugraz.at/sites/rdm/policies/calculation-of-costs-associated-with-rdm",
               "title": "Data Management Costs Link",
               "text": " to find out more about possible data management costs that may also be eligible for funding."
             }
@@ -492,6 +502,8 @@
       "maxlength": "Value must not exceed {{value}} characters.",
       "pattern.currency": "Invalid input, please use the following format: 1234.56",
       "orcid": "Invalid ORCID iD.",
+      "url": "Invalid URL. Must be formatted as https://example.com",
+      "uri": "Invalid URI",
       "doi": "Invalid DOI. Must be formatted as 10.1234/56789 or https://doi.org/10.1234/56789 or doi:10.1234/56789",
       "duplicateDoi": "DOI already added."
     },
@@ -855,6 +867,8 @@
       "SPONSOR": "Sponsor",
       "SUPERVISOR": "Supervisor",
       "WORK_PACKAGE_LEADER": "Work Package Leader",
+      "PRINCIPAL_INVESTIGATOR": "Principal Investigator",
+      "PROJECT_COORDINATOR": "Project Coordinator",
       "OTHER": "Other"
     },
     "costs": {

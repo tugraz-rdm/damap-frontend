@@ -23,6 +23,9 @@ import { SpecifyDataInstructionComponent } from './specify-data-instruction/spec
 import { StepIntroModule } from '../../../widgets/step-intro/step-intro.module';
 import { ToggleButtonsModule } from '../../../widgets/toggle-buttons/toggle-buttons.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { DatasetInformationComponent } from './dataset-information/dataset-information.component';
+import { LimitStringPipe } from '../../../pipes/limit-string/limitString.pipe';
+import { InfoMessageModule } from '../../../widgets/info-message/info-message.module';
 
 @NgModule({
   imports: [
@@ -44,6 +47,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatTabsModule,
     MatChipsModule,
     MatTableModule,
+    LimitStringPipe,
+    InfoMessageModule,
   ],
   declarations: [
     SpecifyDataComponent,
@@ -54,6 +59,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DataMcComponent,
     DatasetDialogUploadComponent,
     SpecifyDataInstructionComponent,
+    DatasetInformationComponent,
   ],
   exports: [
     CommonModule,
@@ -68,6 +74,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ToggleButtonsModule,
     SpecifyDataInstructionComponent,
     DatasetDialogUploadComponent,
+    DatasetInformationComponent,
 
     // Materials
     MatDialogModule,

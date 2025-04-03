@@ -60,6 +60,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
   searchResult$: Observable<SearchResult<Contributor>>;
   serviceConfig$: ServiceConfig[];
   serviceConfigType: ServiceConfig;
+  isCollapsed: boolean = false;
 
   currentUpdateContributorIdx: number = -1;
   form = new UntypedFormGroup({
@@ -101,6 +102,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
         });
       this.subscriptions.push(searchSubscription);
     });
+    this.contactContributor();
   }
 
   mbox(): UntypedFormControl {
@@ -123,10 +125,14 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
   changeContactPerson(contact: Contributor): void {
     this.contactPerson.emit(contact);
+    this.contactContributor();
+    this.isCollapsed = true;
   }
 
   addContributor(contributor: Contributor): void {
     this.contributorToAdd.emit(contributor);
+    this.contactContributor();
+    this.isCollapsed = true;
   }
 
   triggerUpdateContributorDetails(idx: number) {
@@ -190,10 +196,14 @@ export class PeopleComponent implements OnInit, OnDestroy {
         }
       });
     }
+    this.contactContributor();
   }
 
   searchContributor(term: string): void {
     this.searchTerms.next(term);
+    if (term.length > 0) {
+      this.isCollapsed = true;
+    }
   }
 
   get contributors(): UntypedFormArray {
@@ -205,8 +215,19 @@ export class PeopleComponent implements OnInit, OnDestroy {
     return datasets.filter(item => item.deletionPerson?.id === contributor?.id);
   }
 
+  contactContributor(): number {
+    let contributors = this.dmpForm.get('contributors') as UntypedFormArray;
+    return contributors.controls.findIndex(
+      (contributor, index) => contributor.value.contact,
+    );
+  }
+
   onViewChange(view: 'primaryView' | 'secondaryView'): void {
     this.selectedView = view;
+  }
+
+  toggleRecommendations(): void {
+    this.isCollapsed = !this.isCollapsed;
   }
 }
 
