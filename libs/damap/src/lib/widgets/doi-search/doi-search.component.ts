@@ -20,6 +20,7 @@ import { doiValidator } from '../../validators/doi.validator';
   selector: 'app-doi-search',
   templateUrl: './doi-search.component.html',
   styleUrls: ['./doi-search.component.css'],
+  standalone: false,
 })
 export class DoiSearchComponent implements OnChanges {
   @Input() result: Dataset = undefined;
