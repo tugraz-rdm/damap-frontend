@@ -1,10 +1,11 @@
-import { compareContributors, Contributor } from '../domain/contributor';
+import { Contributor, compareContributors } from '../domain/contributor';
 import {
   FormArray,
   FormControl,
   FormGroup,
   UntypedFormArray,
   UntypedFormBuilder,
+  UntypedFormControl,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
@@ -24,8 +25,8 @@ import { Storage } from '../domain/storage';
 import { ccBy } from '../widgets/license-wizard/license-wizard-list';
 import { currencyValidator } from '../validators/currency.validator';
 import { notEmptyValidator } from '../validators/not-empty.validator';
-import { urlValidator } from '../validators/url.validator';
 import { uriValidator } from '../validators/uri.validator';
+import { urlValidator } from '../validators/url.validator';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,7 @@ import { uriValidator } from '../validators/uri.validator';
 export class FormService {
   private TEXT_MAX_LENGTH = 4000;
   private TEXT_SHORT_LENGTH = 255;
+  private readonly DEFAULT_BANNER_COLOR = '#E6F3FF';
   private readonly form: UntypedFormGroup;
   private readonly initialFormValue;
 
@@ -319,9 +321,8 @@ export class FormService {
   }
 
   public addContributorToForm(contributor: Contributor, contact = false) {
-    const contributorFormGroup = this.createContributorFormGroup();
-    contributorFormGroup.patchValue(contributor);
-    contributorFormGroup.patchValue({ contact });
+    contributor.contact = contact;
+    const contributorFormGroup = this.mapContributorToFormGroup(contributor);
     (this.form.get('contributors') as UntypedFormArray).push(
       contributorFormGroup,
     );
@@ -532,7 +533,7 @@ export class FormService {
       ],
       dismissible: [true],
       color: [
-        '',
+        this.DEFAULT_BANNER_COLOR,
         [
           Validators.required,
           Validators.maxLength(this.TEXT_SHORT_LENGTH),
@@ -607,9 +608,9 @@ export class FormService {
       lastName: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       mbox: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       personId: [null],
-      role: [null],
       roleInProject: [''],
       universityId: [null],
+      roles: new UntypedFormControl([]),
     });
   }
 
@@ -617,7 +618,12 @@ export class FormService {
     contributor: Contributor,
   ): UntypedFormGroup {
     const formGroup = this.createContributorFormGroup();
-    formGroup.patchValue(contributor);
+
+    formGroup.patchValue({
+      ...contributor,
+      roles: contributor.roles || [],
+    });
+
     return formGroup;
   }
 
@@ -664,6 +670,7 @@ export class FormService {
       backupLocation: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       backupFrequency: ['', Validators.maxLength(this.TEXT_SHORT_LENGTH)],
       datasets: [[]],
+      isManagedInternally: [false],
     });
   }
 
@@ -679,6 +686,7 @@ export class FormService {
       backupLocation: externalStorage.backupLocation || null,
       backupFrequency: externalStorage.backupFrequency || null,
       datasets: externalStorage.datasets || [],
+      isManagedInternally: externalStorage.isManagedInternally || false,
     });
     return formGroup;
   }

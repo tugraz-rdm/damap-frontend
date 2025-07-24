@@ -6,6 +6,7 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
   selector: 'app-input-wrapper [label] [control]',
   templateUrl: './input-wrapper.component.html',
   styleUrls: ['./input-wrapper.component.css'],
+  standalone: false,
 })
 export class InputWrapperComponent implements OnInit {
   @Input() label: string;
@@ -16,6 +17,7 @@ export class InputWrapperComponent implements OnInit {
   @Input() appearance: MatFormFieldAppearance = 'outline';
   @Input() maxLength = 255;
   @Input() info: string;
+  @Input() stepSize = 100;
   @Output() inputChange: EventEmitter<string> = new EventEmitter<string>();
 
   required = false;
