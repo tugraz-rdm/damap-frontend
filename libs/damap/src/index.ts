@@ -5,6 +5,8 @@ export * from './lib/widgets/env-banner/env-banner.module';
 export * from './lib/widgets/env-banner/env-banner.component';
 export * from './lib/components/dashboard';
 export * from './lib/components/dmp/dmp.module';
+export * from './lib/widgets/app-banner/app-banner.module';
+export * from './lib/widgets/app-banner/app-banner.component';
 
 export * from './lib/store/damap-store.module';
 export * from './lib/store/reducers/login.reducer';
