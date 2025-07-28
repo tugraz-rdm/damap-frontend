@@ -22,25 +22,22 @@
     "schematicCollections": ["@angular-eslint/schematics"]
   },
   "generators": {
-    "@nrwl/angular:application": {
+    "@nx/angular:application": {
       "style": "css",
       "linter": "eslint",
       "unitTestRunner": "karma",
       "e2eTestRunner": "none"
     },
-    "@nrwl/angular:library": {
+    "@nx/angular:library": {
       "linter": "eslint",
       "unitTestRunner": "karma"
-    },
-    "@nrwl/angular:component": {
-      "style": "css"
     },
     "@nx/angular:component": {
       "style": "css"
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": ["{projectRoot}//*", "sharedGlobals"],
     "sharedGlobals": [],
     "production": ["default"]
   }

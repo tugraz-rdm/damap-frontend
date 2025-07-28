@@ -18,7 +18,8 @@
     "module": "ES2022",
     "lib": ["ES2022", "dom"],
     "paths": {
-      "@damap/core": ["libs/damap/src/index.ts"]
+      "@damap/core": ["libs/damap/src/index.ts"],
+      "@damap/widgets/app-banner": ["libs/widgets/app-banner/src/index.ts"]
     },
     "rootDir": "."
   },

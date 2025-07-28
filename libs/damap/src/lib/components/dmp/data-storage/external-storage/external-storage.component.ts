@@ -9,6 +9,7 @@ import {
   selector: 'app-dmp-external-storage',
   templateUrl: './external-storage.component.html',
   styleUrls: ['./external-storage.component.css'],
+  standalone: false,
 })
 export class ExternalStorageComponent {
   @Input() externalStorageStep: UntypedFormArray;
@@ -30,5 +31,16 @@ export class ExternalStorageComponent {
 
   removeExternalStorage(index: number) {
     this.externalStorageToRemove.emit(index);
+  }
+
+  anyNonInternalStorage(): boolean {
+    let result = false;
+    for (let control of this.externalStorageStep.controls) {
+      if (!(control as UntypedFormGroup).controls.isManagedInternally.value) {
+        result = true;
+        break;
+      }
+    }
+    return result;
   }
 }

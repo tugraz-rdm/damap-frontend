@@ -2,12 +2,17 @@
   "dmp": {
     "steps": {
       "project": {
+        "success": "Updated project information!",
         "input": {
           "title": "Project title",
           "description": "Project description",
-          "button": "Update project",
-          "acronym": "Update acronym",
-          "date": "Enter start and end date",
+          "info": "Project information",
+          "button": {
+            "existing": "Update project info",
+            "new": "Add project"
+          },
+          "acronym": "Acronym",
+          "date": "Start and end date",
           "datehint": "DD/MM/YYYY – DD/MM/YYYY"
         },
         "manual.input": "Input project manually",
@@ -37,6 +42,7 @@
         "search.service": "Search service",
         "general.search": "Find Contributors",
         "general.recommendations": "Recommended contributors:",
+        "general.addAll": "Add all contributors",
         "contributor": {
           "search": "Search contributor",
           "add": "Add as contributor",
@@ -113,7 +119,7 @@
           "button": {
             "add": {
               "manual": "Add dataset manually",
-              "doi": "Find dataset"
+              "doi": "Add dataset"
             }
           },
           "table": {
@@ -227,6 +233,7 @@
           "add": "Add other storage location",
           "remove": "Remove external storage",
           "question": {
+            "isManagedInternally": "Is this storage provided by a department or service unit of your institution?",
             "name": "Storage Name",
             "location": "Storage Location",
             "backup": {
@@ -445,18 +452,19 @@
           }
         },
         "storage": {
-          "nonestored": "No (produced) datasets to be stored.",
-          "nodata": "No data defined yet.",
-          "alldata": "All (produced) datasets are stored.",
-          "missingexplanation": " Usage explanation is missing."
+          "allinfo": "All information necessary provided.",
+          "nonestored": "No datasets will be stored, as no produced or reused datasets have been specified.",
+          "missingstorage": "Some datasets do not have storages assigned.",
+          "missingexplanation": " Explanation for using external storage is missing."
         },
         "licensing": {
           "complete": "All information necessary provided.",
-          "incomplete": "Some information is missing."
+          "incomplete": "Some information is missing.",
+          "noproduceddata": "No produced dataset has been specified."
         },
         "repositories": {
           "nodata": "No data to be deposited.",
-          "nodataspecified": "No data defined yet.",
+          "noproduceddata": "No produced dataset has been specified.",
           "deposited": {
             "incomplete": "Not all data deposited yet.",
             "complete": "All data are deposited."
@@ -468,7 +476,8 @@
         }
       }
     },
-    "nodatasets": "Please define datasets first.",
+    "nodatasets": "Please declare any new or existing dataset first.",
+    "nonewdataset": "Please declare a produced (i.e. new) dataset first.",
     "success": {
       "update": "DMP was updated!",
       "save": "DMP was saved!",
@@ -519,6 +528,7 @@
     }
   },
   "license.wizard": {
+    "legalWarning": "This is not legal advice. Please choose your license carefully.",
     "select": "Select license with license selector",
     "title": "Choose a License",
     "info": "More info",
@@ -549,6 +559,14 @@
       "library": "Library"
     },
     "license": {
+      "nolicense": {
+        "name": "No License",
+        "description": "This should be selected when no license is granted."
+      },
+      "custom": {
+        "name": "Custom License",
+        "description": "This should be selected when a custom license is granted."
+      },
       "agpl1": {
         "name": "Affero General Public License v1.0 only",
         "description": "The GNU Affero General Public License is a free, copyleft license for software and other kinds of works, specifically designed to ensure cooperation with the community in the case of network server software."
@@ -836,6 +854,7 @@
     "agreement": {
       "CONSORTIUM_AGREEMENT": "consortium agreement",
       "DATA_PROCESSING_AGREEMENT": "data processing agreement",
+      "DATA_TRANSFER_AGREEMENT": "data transfer agreement",
       "JOINT_CONTROL_AGREEMENT": "joint control agreement",
       "CONFIDENTIALITY_AGREEMENT": "confidentiality agreement",
       "OTHER": "other"
