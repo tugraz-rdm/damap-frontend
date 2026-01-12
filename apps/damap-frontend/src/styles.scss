@@ -62,7 +62,10 @@
     )};
 
   --footer-color: #{mat.get-theme-color($app-light-theme, inverse-surface)};
-  --on-footer-color: #{mat.get-theme-color($app-light-theme, inverse-on-surface)};
+  --on-footer-color: #{mat.get-theme-color(
+      $app-light-theme,
+      inverse-on-surface
+    )};
   --user-navbar-color: #{mat.get-theme-color($app-light-theme, neutral, 25)};
   --neutral-color-medium-light: #{mat.get-theme-color(
       $app-light-theme,
@@ -117,7 +120,11 @@
       font
     )};
 
-  --title-large: #{mat.get-theme-typography($app-light-theme, title-large, font)};
+  --title-large: #{mat.get-theme-typography(
+      $app-light-theme,
+      title-large,
+      font
+    )};
 
   --body-large: #{mat.get-theme-typography($app-light-theme, body-large, font)};
 
