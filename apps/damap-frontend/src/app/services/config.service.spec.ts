@@ -10,6 +10,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { Router } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
 import { environment } from '../../environments/environment';
+import { FeedbackService } from '@damap/core';
 
 describe('ConfigService', () => {
   let service: ConfigService;
@@ -28,6 +29,10 @@ describe('ConfigService', () => {
     ]);
 
     const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+    const feedbackSpy = jasmine.createSpyObj('FeedbackService', [
+      'success',
+      'error',
+    ]);
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -36,6 +41,7 @@ describe('ConfigService', () => {
         ConfigService,
         { provide: OAuthService, useValue: oauthSpy },
         { provide: Router, useValue: routerSpy },
+        { provide: FeedbackService, useValue: feedbackSpy },
       ],
     });
 

@@ -11,7 +11,9 @@
           <!--Sensitive Data-->
           <div class="flex-radio">
             <label id="sensitiveData"
-              >{{ "dmp.steps.legal.question.sensitiveData.prefix" | translate }}
+              >{{
+                "dmp.steps.legal.question.sensitiveData.prefix" | translate
+              }}
               <a
                 href="{{ 'dmp.steps.legal.link.sensitiveData' | translate }}"
                 target="_blank"
@@ -84,7 +86,9 @@
                 </div>
                 <ng-container *ngIf="isOtherMeasureSelected">
                   <app-textarea-wrapper
-                    [label]="'dmp.steps.legal.question.otherDataSecurityMeasures'"
+                    [label]="
+                      'dmp.steps.legal.question.otherDataSecurityMeasures'
+                    "
                     [control]="otherDataSecurityMeasures"
                     [maxLength]="4000"></app-textarea-wrapper>
                 </ng-container>
@@ -168,7 +172,9 @@
                 <br /><br />
                 <ng-container *ngIf="isOtherSelected">
                   <app-textarea-wrapper
-                    [label]="'dmp.steps.legal.question.otherPersonalDataCompliance'"
+                    [label]="
+                      'dmp.steps.legal.question.otherPersonalDataCompliance'
+                    "
                     [control]="otherPersonalDataCompliance"
                     [maxLength]="4000"></app-textarea-wrapper>
                 </ng-container>
@@ -228,7 +234,9 @@
               </mat-form-field>
               <ng-container *ngIf="isOtherDocumentSelected">
                 <app-textarea-wrapper
-                  [label]="'dmp.steps.legal.question.otherLegalRestrictionsDocuments'"
+                  [label]="
+                    'dmp.steps.legal.question.otherLegalRestrictionsDocuments'
+                  "
                   [maxLength]="4000"
                   [control]="
                     otherLegalRestrictionsDocuments

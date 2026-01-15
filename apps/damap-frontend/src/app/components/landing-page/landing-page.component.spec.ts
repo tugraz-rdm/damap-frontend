@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LandingPageComponent } from './landing-page.component';
 import { TranslateTestingModule } from '@damap/core';
 import { of } from 'rxjs';
+import { ConfigService } from '../../services/config.service';
 
 describe('LandingPageComponent', () => {
   let component: LandingPageComponent;
@@ -22,6 +23,12 @@ describe('LandingPageComponent', () => {
                 get: () => 'mockValue',
               },
             },
+          },
+        },
+        {
+          provide: ConfigService,
+          useValue: {
+            isBackendDown: () => of(false),
           },
         },
       ],

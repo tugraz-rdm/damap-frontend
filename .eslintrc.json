@@ -1,7 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@typescript-eslint", "@nx/eslint-plugin", "@angular-eslint"],
+  "ignorePatterns": ["**/dist/**", "**/coverage/**", "**/tmp/**", "**/*.js"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -9,6 +8,15 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.base.json",
+          "apps/**/tsconfig*.json",
+          "libs/**/tsconfig*.json",
+          "tools/**/tsconfig*.json"
+        ],
+        "createDefaultProgram": true
+      },
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
@@ -25,31 +33,14 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@angular-eslint/prefer-standalone": "off"
       }
     },
     {
       "files": ["*.html"],
       "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
-    },
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-        "@nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
-          }
-        ]
-      }
     }
   ]
 }
