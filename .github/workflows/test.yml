@@ -18,10 +18,6 @@ jobs:
       - name: Install dependencies
         run: npm run ci:install
 
-      - uses: nrwl/nx-set-shas@v3
-        with:
-          main-branch-name: "main"
-      - run: npm run report
       - run: npm run format:check
 
       - name: Merge - Lint all projects

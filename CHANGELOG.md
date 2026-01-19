@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] -
 
+## [4.7.0] - 2025-12-11
+
+### Added
+
+- Landing page now shows a meaningful error and tries to connect when the backend is down [#481](https://github.com/damap-org/damap-frontend/pull/481)
+
+### Changed
+
+- Improved UI for contributor section [#483](https://github.com/damap-org/damap-frontend/pull/483)
+- **BREAKING**: Removed NX integration, migrated to plain Angular CLI [#479](https://github.com/damap-org/damap-frontend/pull/479)
+  - All scripts now use `ng` instead of `nx`
+  - Removed `nx.json` and `project.json` files
+  - Added `angular.json` for Angular CLI configuration
+  - Updated dependencies: removed `@nrwl/*` and `@nx/*` packages, added `@angular-eslint/builder`, `@cypress/schematic`, `eslint`
+
+### Removed
+
+- Removed nx integration to simplify the build [#479](https://github.com/damap-org/damap-frontend/pull/479)
+
+### Fixed
+
+- Added missing HE to text under "How to Create" section [#485](https://github.com/damap-org/damap-frontend/pull/485)
+- Updated link in "How to Create" section [#482](https://github.com/damap-org/damap-frontend/pull/482)
+- Fixed a bug where the wrong person service was used to fetch information [#489](https://github.com/damap-org/damap-frontend/pull/489)
+- Fixed broken link in cost section [#501](https://github.com/damap-org/damap-frontend/pull/501)
+- Fixed a bug where the export would display different dataset sizes than selected in the frontend [#493](https://github.com/damap-org/damap-frontend/pull/493)
+
 ## [4.6.0] - 2025-07-08
 
 ### Added

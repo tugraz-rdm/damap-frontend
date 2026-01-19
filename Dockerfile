@@ -5,7 +5,7 @@
 FROM trion/ng-cli:18.0.3 AS deps
 
 # This Dockerfile uses labels from the label-schema namespace from http://label-schema.org/rc1/
-LABEL maintainer="rdmteam@tugraz.at" \
+LABEL maintainer="lthaci@tugraz.at" \
         org.label-schema.name="DAMAP-frontend" \
         org.label-schema.description="DAMAP is a tool that aims to facilitate the creation of data management plans (DMPs) for researchers." \
         org.label-schema.usage="https://github.com/tugraz-rdm/damap-frontend/tree/main/README.md" \
@@ -13,7 +13,7 @@ LABEL maintainer="rdmteam@tugraz.at" \
         org.label-schema.url="https://github.com/tugraz-rdm/damap-frontend" \
         org.label-schema.vcs-url="https://github.com/tugraz-rdm/damap-frontend" \
         org.label-schema.schema-version="1.0" \
-        org.label-schema.docker.cmd="docker run -d -p 8080:8080 damap"        
+        org.label-schema.docker.cmd="docker run -d -p 8080:8080 damap"
 
 COPY package.json package-lock.json /app/
 
@@ -23,9 +23,8 @@ COPY . /app
 ENV PATH="$PATH:/app/node_modules/@angular/cli/bin/"
 
 # install and build the application on the builder container
-RUN npm install --ignore-scripts -g "nx@19.3.0"
 RUN npm ci --ignore-scripts
-RUN npx nx build damap-frontend
+RUN npm run build
 
 ARG APP=damap-frontend
 
@@ -33,4 +32,4 @@ ARG APP=damap-frontend
 FROM nginxinc/nginx-unprivileged AS runner
 ADD docker/conf.d/* /etc/nginx/conf.d
 
-COPY --from=deps --chown=1001:0 /app/dist/apps/damap-frontend/ /usr/share/nginx/html/
+COPY --from=deps --chown=1001:0 /app/dist/damap-frontend/ /usr/share/nginx/html/

@@ -10,14 +10,16 @@ We at TU Graz also contribute to the base DAMAP implementation, collaborating cl
 
 This project is based on the DAMAP frontend developed in cooperation between TU Wien and TU Graz, but has been adapted to meet the specific needs of the TUGraz DMP Tool. This adaptation focuses on institutional integration, allowing researchers to manage their Data Management Plans (DMPs) efficiently, leveraging existing systems at the institution.
 
-The project uses [Angular](https://angular.io/) as its framework and relies on [NX](https://nx.dev/) as a build system.
+The project uses [Angular](https://angular.io/) as its framework and Angular CLI as the build system.
 
 ### Development Server
 
 To run the development server:
 
 ```bash
-nx serve damap-frontend
+npm start
+# or
+ng serve damap-frontend
 ```
 
 This will start the dev server, and the app will be accessible at `http://localhost:4200/`. Any changes made to the source files will trigger automatic reloading.
@@ -27,26 +29,22 @@ This will start the dev server, and the app will be accessible at `http://localh
 To build the project for production:
 
 ```bash
-nx build damap-frontend
+npm run build
+# or
+ng build damap-frontend
 ```
 
-The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The build artifacts will be stored in the `dist/` directory. Use `npm run build-prod` for a production build with optimizations.
 
 ### Running Unit Tests
 
 To run the unit tests:
 
-- For the DAMAP library:
-
-  ```bash
-  nx test damap
-  ```
-
-- For the DAMAP frontend:
-
-  ```bash
-  nx test damap-frontend
-  ```
+```bash
+npm test
+# or
+ng test damap-frontend
+```
 
 ### Running with Docker
 
