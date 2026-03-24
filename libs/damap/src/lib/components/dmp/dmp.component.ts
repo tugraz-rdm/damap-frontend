@@ -72,6 +72,12 @@ export class DmpComponent implements OnInit, OnDestroy {
   ethicalReportEnabled: boolean = true;
 
   selectedViewStorage: 'primaryView' | 'secondaryView' = 'primaryView';
+  currentRepoView: 'primaryView' | 'secondaryView' = 'primaryView';
+
+  onRepoViewChange(view: 'primaryView' | 'secondaryView'): void {
+    this.currentRepoView = view;
+    this.repoComponent?.onViewChange(view);
+  }
 
   get username(): string {
     return this.auth.getUsername();

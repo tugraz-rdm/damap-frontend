@@ -182,7 +182,8 @@
         ">
         <ng-container *ngIf="selectedStep === 7">
           <app-repo-instruction
-            (selectionChange)="repoComponent?.onViewChange($event)">
+            [activeView]="currentRepoView"
+            (selectionChange)="onRepoViewChange($event)">
           </app-repo-instruction>
         </ng-container>
       </mat-step>
@@ -316,7 +317,8 @@
           [repoStep]="repoStep"
           [datasets]="datasets"
           (repositoryToAdd)="addRepository($event)"
-          (repositoryToRemove)="removeRepository($event)">
+          (repositoryToRemove)="removeRepository($event)"
+          (viewChangeRequest)="onRepoViewChange($event)">
         </app-dmp-repo>
         <div *ngIf="repoStep.invalid" class="error-message">
           {{ "dmp.steps.repositories.error" | translate }}

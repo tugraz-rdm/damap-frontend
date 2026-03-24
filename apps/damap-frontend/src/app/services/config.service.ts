@@ -53,6 +53,7 @@ export class ConfigService {
             // useSilentRefresh: true,
             responseType: 'code',
             showDebugInformation: isDevMode(),
+            requireHttps: config.env === 'PROD',
             // sessionChecksEnabled: true,
           };
           this.oauthService.configure(authConfig);

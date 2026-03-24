@@ -62,9 +62,9 @@ describe('ConfigService', () => {
         authUrl: 'https://auth-url',
         authClient: 'client-id',
         authScope: 'scope',
+        authUser: '',
         env: 'test-env',
         appTitle: 'Test App Title',
-        authUser: '',
         personSearchServiceConfigs: [],
         fitsServiceAvailable: false,
         livePreviewAvailable: true,
@@ -94,6 +94,7 @@ describe('ConfigService', () => {
         scope: mockConfig.authScope,
         responseType: 'code',
         showDebugInformation: isDevMode(),
+        requireHttps: mockConfig.env === 'PROD',
       });
 
       expect(mockOAuthService.setupAutomaticSilentRefresh).toHaveBeenCalled();
@@ -104,12 +105,13 @@ describe('ConfigService', () => {
         authUrl: 'https://auth-url',
         authClient: 'client-id',
         authScope: 'scope',
+        authUser: '',
         env: 'test-env',
         appTitle: null,
-        authUser: '',
         personSearchServiceConfigs: [],
         fitsServiceAvailable: false,
         livePreviewAvailable: true,
+        ethicalReportEnabled: true,
       };
 
       mockOAuthService.loadDiscoveryDocumentAndTryLogin.and.returnValue(
@@ -136,9 +138,9 @@ describe('ConfigService', () => {
         authUrl: 'https://auth-url',
         authClient: 'client-id',
         authScope: 'scope',
+        authUser: '',
         env: 'test-env',
         appTitle: 'Test App Title',
-        authUser: '',
         personSearchServiceConfigs: [],
         fitsServiceAvailable: false,
         livePreviewAvailable: true,

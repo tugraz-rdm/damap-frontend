@@ -23,7 +23,7 @@ COPY . /app
 ENV PATH="$PATH:/app/node_modules/@angular/cli/bin/"
 
 # install and build the application on the builder container
-RUN npm ci --ignore-scripts
+RUN npm ci --ignore-scripts --legacy-peer-deps
 RUN npm run build
 
 ARG APP=damap-frontend
