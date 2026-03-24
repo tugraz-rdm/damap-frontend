@@ -9,10 +9,17 @@ export const serviceConfigMockData: ServiceConfig[] = [
 
 // Mock data for config
 export const configMockData: Config = {
-  authUrl: '',
-  authClient: '',
-  authScope: '',
-  authUser: '',
+  issuer: '',
+  clientID: '',
+  responseType: 'code',
+  scope: '',
+  userRolesClaimPath: '',
+  userIdClaim: '',
+  nameClaim: '',
+  givenNameClaim: '',
+  familyNameClaim: '',
+  emailClaim: '',
+  adminRoleName: '',
   env: '',
   appTitle: '',
   personSearchServiceConfigs: serviceConfigMockData,

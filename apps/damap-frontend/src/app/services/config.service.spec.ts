@@ -59,12 +59,19 @@ describe('ConfigService', () => {
   describe('#initializeApp', () => {
     it('should load config and set up OAuthService correctly', async () => {
       const mockConfig: Config = {
-        authUrl: 'https://auth-url',
-        authClient: 'client-id',
-        authScope: 'scope',
+        issuer: 'https://auth-url',
+        clientID: 'client-id',
+        scope: 'scope',
+        responseType: 'code',
+        userRolesClaimPath: '',
+        userIdClaim: '',
+        nameClaim: '',
+        givenNameClaim: '',
+        familyNameClaim: '',
+        emailClaim: '',
+        adminRoleName: '',
         env: 'test-env',
         appTitle: 'Test App Title',
-        authUser: '',
         personSearchServiceConfigs: [],
         fitsServiceAvailable: false,
         livePreviewAvailable: true,
@@ -86,14 +93,15 @@ describe('ConfigService', () => {
       await initializePromise;
 
       expect(mockOAuthService.configure).toHaveBeenCalledWith({
-        issuer: mockConfig.authUrl,
-        clientId: mockConfig.authClient,
+        issuer: mockConfig.issuer,
+        clientId: mockConfig.clientID,
         redirectUri: window.location.origin,
         logoutUrl: window.location.origin,
         oidc: true,
-        scope: mockConfig.authScope,
-        responseType: 'code',
+        scope: mockConfig.scope,
+        responseType: mockConfig.responseType,
         showDebugInformation: isDevMode(),
+        requireHttps: !isDevMode(),
       });
 
       expect(mockOAuthService.setupAutomaticSilentRefresh).toHaveBeenCalled();
@@ -101,15 +109,23 @@ describe('ConfigService', () => {
 
     it('should log a warning if appTitle is missing', async () => {
       const mockConfig = {
-        authUrl: 'https://auth-url',
-        authClient: 'client-id',
-        authScope: 'scope',
+        issuer: 'https://auth-url',
+        clientID: 'client-id',
+        scope: 'scope',
+        responseType: 'code',
+        userRolesClaimPath: '',
+        userIdClaim: '',
+        nameClaim: '',
+        givenNameClaim: '',
+        familyNameClaim: '',
+        emailClaim: '',
+        adminRoleName: '',
         env: 'test-env',
         appTitle: null,
-        authUser: '',
         personSearchServiceConfigs: [],
         fitsServiceAvailable: false,
         livePreviewAvailable: true,
+        ethicalReportEnabled: true,
       };
 
       mockOAuthService.loadDiscoveryDocumentAndTryLogin.and.returnValue(
@@ -133,12 +149,19 @@ describe('ConfigService', () => {
   describe('#getAppTitle', () => {
     it('should return the appTitle from the loaded config', () => {
       const mockConfig: Config = {
-        authUrl: 'https://auth-url',
-        authClient: 'client-id',
-        authScope: 'scope',
+        issuer: 'https://auth-url',
+        clientID: 'client-id',
+        scope: 'scope',
+        responseType: 'code',
+        userRolesClaimPath: '',
+        userIdClaim: '',
+        nameClaim: '',
+        givenNameClaim: '',
+        familyNameClaim: '',
+        emailClaim: '',
+        adminRoleName: '',
         env: 'test-env',
         appTitle: 'Test App Title',
-        authUser: '',
         personSearchServiceConfigs: [],
         fitsServiceAvailable: false,
         livePreviewAvailable: true,

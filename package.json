@@ -20,7 +20,7 @@
     "ci:e2e": "npm run e2e",
     "ci:coverage": "ng test damap-frontend --browsers=ChromeHeadless --watch=false --code-coverage",
     "ci:audit": "npm audit",
-    "ci:install": "npm ci",
+    "ci:install": "npm ci --legacy-peer-deps",
     "format": "npx prettier --write .",
     "format:check": "npx prettier --check ."
   },

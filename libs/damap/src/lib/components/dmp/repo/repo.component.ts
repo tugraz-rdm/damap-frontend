@@ -41,6 +41,9 @@ export class RepoComponent implements OnInit {
 
   @Output() repositoryToAdd = new EventEmitter<any>();
   @Output() repositoryToRemove = new EventEmitter<any>();
+  @Output() viewChangeRequest = new EventEmitter<
+    'primaryView' | 'secondaryView'
+  >();
 
   LoadingState = LoadingState;
   readonly datasetSource: any = DataSource;
@@ -107,5 +110,10 @@ export class RepoComponent implements OnInit {
 
   onViewChange(view: 'primaryView' | 'secondaryView'): void {
     this.selectedView = view;
+  }
+
+  switchToSearch(): void {
+    this.selectedView = 'secondaryView';
+    this.viewChangeRequest.emit('secondaryView');
   }
 }

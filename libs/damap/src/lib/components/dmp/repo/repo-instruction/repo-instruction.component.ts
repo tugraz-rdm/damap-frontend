@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-repo-instruction',
@@ -6,6 +6,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
   standalone: false,
 })
 export class RepoInstructionComponent {
+  @Input() set activeView(view: 'primaryView' | 'secondaryView') {
+    if (view) {
+      this.selectedView = view;
+    }
+  }
+
   @Output() selectionChange = new EventEmitter<
     'primaryView' | 'secondaryView'
   >();
