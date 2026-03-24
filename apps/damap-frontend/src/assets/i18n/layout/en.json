@@ -29,7 +29,7 @@
     },
     "dataprotection": {
       "text": "Data Protection Declaration",
-      "link": "/assets/legal/Datenschutzerklärung_PrivacyPolicy_TU_Graz_DMP_Tool.pdf"
+      "link": "https://doi.org/10.3217/65qk5-gjy16"
     },
     "impressum": {
       "text": "Impressum",
@@ -37,11 +37,11 @@
     },
     "termsandconditions": {
       "text": "Terms and Conditions",
-      "link": "/assets/legal/Nutzungsbedingungen_TermsofUse_TU_Graz_DMP_Tool.pdf"
+      "link": "https://doi.org/10.3217/tqcxx-z7a85"
     },
     "accessibility": {
-      "text": "Accessibility",
-      "link": "/assets/legal/Barrierefreiheitserklärung_AccessibilityStatement_TU_Graz_DMP_Tool.pdf"
+      "text": "Accessibility Statement",
+      "link": "https://doi.org/10.3217/khxqk-2vn50"
     },
     "icon": {
       "dataAlert": "Expand the menu to access legal information"
